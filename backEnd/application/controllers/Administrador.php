@@ -131,6 +131,14 @@ class Administrador extends CI_Controller
         }
     }
 
+    public function Busquedas(){
+        if (count($this->session->userdata("administrador")) > 0) {
+            $this->load->view("Administrador/Busquedas");
+        } else {
+            $this->load->view("Errormsg");
+        }
+    }
+
     public function ImportarProfesores()
     {
         if (count($this->session->userdata("administrador")) > 0) {
@@ -194,7 +202,7 @@ class Administrador extends CI_Controller
     //
     //
     //----------------------INICIO-------------------------------CRUD ALUMNO
-    
+
     //----------------------INICIO-------------------------------CRUD MATERIA
     public function agregarMateria()
     {
@@ -223,15 +231,18 @@ class Administrador extends CI_Controller
 
                     if ($resultado == "ok") {
                         move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                        redirect("Materias");
+
+
+                        echo "ok";
                     } else {
-                        echo "Error al registrar la materia";
+
+                        echo "error";
                     }
                 } else {
-                    echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                    echo "error";
                 }
             } else {
-                echo "El tamaño de la imagen supera el limite";
+                echo "error";
             }
         } else {
             $this->load->view('Errormsg');
@@ -606,9 +617,10 @@ class Administrador extends CI_Controller
                 $ciudad = $this->input->post("ciudad");
                 $resultado = $this->modeloAdministrador->editarInstitucion($institucion, $nombre, $descripcion, $ciudad);
                 if ($resultado == "ok") {
-                    redirect("Institucion");
+
+                    echo "ok";
                 } else {
-                    echo "Error al registrar la materia";
+                    echo "error";
                 }
             } else {
                 if ($tamano_imagen <= 10000000) {
@@ -628,15 +640,15 @@ class Administrador extends CI_Controller
                         if ($resultado == "ok") {
                             unlink($carpeta_destino . $fotoantigua);
                             move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Institucion");
+                            echo "ok";
                         } else {
-                            echo "Error al registrar la materia";
+                            echo "error";
                         }
                     } else {
-                        echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                        echo "error";
                     }
                 } else {
-                    echo "El tamaño de la imagen supera el limite";
+                    echo "error";
                 }
             }
         } else {
@@ -686,73 +698,89 @@ class Administrador extends CI_Controller
             $tipo_imagen = $_FILES['foto']['type'];
             $tamano_imagen = $_FILES['foto']['size'];
 
-            if ($nombre_imagen == null || $tipo_imagen == null || $tamano_imagen == null) {
-                $user = $this->session->userdata("administrador");
+            $nacionalidad = $this->input->post("nacionalidad");
+            $apoderado = $this->input->post("apoderado");
+            if ($nacionalidad != null && $apoderado != null) {
+                if ($nombre_imagen == null || $tipo_imagen == null || $tamano_imagen == null) {
+                    $user = $this->session->userdata("administrador");
 
-                $rut = $this->input->post("j_username");
-                $nombre = $this->input->post("nombre");
-                $apellido = $this->input->post("apellido");
-                $prueba = $this->input->post("nacimiento");
-                $numero = $this->input->post("numero");
-                $correo = $this->input->post("correo");
-                $nacionalidad = $this->input->post("nacionalidad");
-                $apoderado = $this->input->post("apoderado");
-                $institucion = $user[0]->institucionAdministrador;
-                $responsable = $user[0]->idAdministrador;
-                $clave = substr("$numero", -4);
+                    $rut = $this->input->post("j_username");
+                    $nombre = $this->input->post("nombre");
+                    $apellido = $this->input->post("apellido");
+                    $prueba = $this->input->post("nacimiento");
+                    $numero = $this->input->post("numero");
+                    $correo = $this->input->post("correo");
+                    $nacionalidad = $this->input->post("nacionalidad");
+                    $apoderado = $this->input->post("apoderado");
+                    $institucion = $user[0]->institucionAdministrador;
+                    $responsable = $user[0]->idAdministrador;
+                    $clave = substr("$numero", -4);
 
-                $time = strtotime($prueba);
+                    $time = strtotime($prueba);
 
-                $nacimiento = date('Y-m-d', $time);
-                $resultado = $this->modeloAdministrador->addAlumnoSinFoto($rut , $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $apoderado, $institucion, $nacionalidad, $responsable);
-                if ($resultado == "ok") {
-                    redirect("Alumnos");
-                } else if ($resultado == "no") {
-                    echo "Rut Ya Registrado...";
-                }
-            } else {
-                if ($tamano_imagen <= 10000000) {
-                    if ($tipo_imagen == "image/jpeg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/jpj" || $tipo_imagen == "image/gif") {
-                        $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . 'Tesis/backEnd/lib/img/Alumnos/';
-                        $nombre_imagen = $hora . $nombre_imagen;
+                    $nacimiento = date('Y-m-d', $time);
+                    $resultado = $this->modeloAdministrador->addAlumnoSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $apoderado, $institucion, $nacionalidad, $responsable);
+                    if ($resultado == "ok") {
+                        $this->load->view("Administrador/Usuarios/Alumnos");
+                        echo "<script> alert('Alumno Registrado con Exito')</script>";
+                    } else if ($resultado == "no") {
 
-                        $user = $this->session->userdata("administrador");
-
-                        $rut = $this->input->post("j_username");
-                        $nombre = $this->input->post("nombre");
-                        $apellido = $this->input->post("apellido");
-                        $prueba = $this->input->post("nacimiento");
-                        $numero = $this->input->post("numero");
-                        $correo = $this->input->post("correo");
-                        $nacionalidad = $this->input->post("nacionalidad");
-                        $apoderado = $this->input->post("apoderado");
-                        $institucion = $user[0]->institucionAdministrador;
-                        $responsable = $user[0]->idAdministrador;
-                        $clave = substr("$numero", -4);
-
-                        $time = strtotime($prueba);
-
-                        $nacimiento = date('Y-m-d', $time);
-
-                        $resultado = $this->modeloAdministrador->addAlumnoConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $apoderado, $institucion, $nacionalidad, $responsable);
-
-                        if ($resultado == "ok") {
-                            move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Alumnos");
-                        } else if ($resultado == "no") {
-                            echo "Rut Ya Registrado...";
-                        }
-                    } else {
-                        echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                        $this->load->view("Administrador/Usuarios/Alumnos");
+                        echo "<script> alert('Rut Ya Registrado')</script>";
                     }
                 } else {
-                    echo "El tamaño de la imagen supera el limite";
+                    if ($tamano_imagen <= 10000000) {
+                        if ($tipo_imagen == "image/jpeg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/jpj" || $tipo_imagen == "image/gif") {
+                            $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . 'Tesis/backEnd/lib/img/Alumnos/';
+                            $nombre_imagen = $hora . $nombre_imagen;
+
+                            $user = $this->session->userdata("administrador");
+
+                            $rut = $this->input->post("j_username");
+                            $nombre = $this->input->post("nombre");
+                            $apellido = $this->input->post("apellido");
+                            $prueba = $this->input->post("nacimiento");
+                            $numero = $this->input->post("numero");
+                            $correo = $this->input->post("correo");
+                            $nacionalidad = $this->input->post("nacionalidad");
+                            $apoderado = $this->input->post("apoderado");
+                            $institucion = $user[0]->institucionAdministrador;
+                            $responsable = $user[0]->idAdministrador;
+                            $clave = substr("$numero", -4);
+
+                            $time = strtotime($prueba);
+
+                            $nacimiento = date('Y-m-d', $time);
+
+                            $resultado = $this->modeloAdministrador->addAlumnoConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $apoderado, $institucion, $nacionalidad, $responsable);
+
+                            if ($resultado == "ok") {
+                                move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
+
+                                $this->load->view("Administrador/Usuarios/Alumnos");
+                                echo "<script> alert('Alumno Registrado con Exito')</script>";
+                            } else if ($resultado == "no") {
+                                $this->load->view("Administrador/Usuarios/Alumnos");
+                                echo "<script> alert('Rut Ya Registrado')</script>";
+                            }
+                        } else {
+                            $this->load->view("Administrador/Usuarios/Alumnos");
+                            echo "<script> alert('El formato de la imagen tiene que ser jpg, png, jpeg o gif.')</script>";
+                        }
+                    } else {
+                        $this->load->view("Administrador/Usuarios/Alumnos");
+                        echo "<script> alert('El tamaño de la imagen supera el limite')</script>";
+                    }
                 }
+            } else {
+                $this->load->view("Administrador/Usuarios/Alumnos");
+                echo "<script> alert('Faltan datos por rellenar')</script>";
             }
         } else {
             $this->load->view('Errormsg');
         }
     }
+
 
     public function getTablaAlumnos()
     {
@@ -807,7 +835,7 @@ class Administrador extends CI_Controller
             $tipo_imagen = $_FILES['foto']['type'];
             $tamano_imagen = $_FILES['foto']['size'];
             $parentesco = $this->input->post("parentesco");
-            if ($parentesco != "") {
+            if ($parentesco != null) {
                 if ($nombre_imagen == null || $tipo_imagen == null || $tamano_imagen == null) {
                     $user = $this->session->userdata("administrador");
 
@@ -827,9 +855,9 @@ class Administrador extends CI_Controller
                     $clave = substr("$numero", -4);
                     $resultado = $this->modeloAdministrador->addApoderadoSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $parentesco, $responsable, $institucion);
                     if ($resultado == "ok") {
-                        redirect("Apoderados");
+                        echo "ok";
                     } else if ($resultado == "no") {
-                        echo "Rut Ya Registrado...";
+                        echo "error";
                     }
                 } else {
                     if ($tamano_imagen <= 10000000) {
@@ -857,19 +885,19 @@ class Administrador extends CI_Controller
 
                             if ($resultado == "ok") {
                                 move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                                redirect("Apoderados");
+                                echo "ok";
                             } else if ($resultado == "no") {
-                                echo "Rut Ya Registrado...";
+                                echo "error";
                             }
                         } else {
-                            echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                            echo "error2";
                         }
                     } else {
-                        echo "El tamaño de la imagen supera el limite";
+                        echo "error2";
                     }
                 }
             } else {
-                echo "Ingrese el Parentesco...";
+                echo "falta";
             }
         } else {
             $this->load->view('Errormsg');
@@ -963,16 +991,28 @@ class Administrador extends CI_Controller
                 $time = strtotime($prueba);
 
                 $nacimiento = date('Y-m-d', $time);
+                $año = date('Y');
+
+                $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año;
+
+
+
 
 
                 $institucion = $user[0]->institucionAdministrador;
                 $responsable = $user[0]->idAdministrador;
                 $clave = substr("$numero", -4);
-                $resultado = $this->modeloAdministrador->addProfesorSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $institucion, $responsable);
+                $resultado = $this->modeloAdministrador->addProfesorSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $institucion, $responsable, $rutaCarpeta);
                 if ($resultado == "ok") {
-                    redirect("Profesores");
+                    if (!file_exists($rutaCarpeta)) {
+                        mkdir($_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año, 0777, true);
+
+                        echo "ok";
+                    } else {
+                        echo "existe";
+                    }
                 } else if ($resultado == "no") {
-                    echo "Rut Ya Registrado...";
+                    echo "error";
                 }
             } else {
                 if ($tamano_imagen <= 10000000) {
@@ -990,25 +1030,34 @@ class Administrador extends CI_Controller
                         $correo = $this->input->post("correo");
 
                         $time = strtotime($prueba);
+                        $año = date('Y');
+
+                        $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año;
+
 
                         $nacimiento = date('Y-m-d', $time);
 
                         $institucion = $user[0]->institucionAdministrador;
                         $responsable = $user[0]->idAdministrador;
                         $clave = substr("$numero", -4);
-                        $resultado = $this->modeloAdministrador->addProfesorConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $institucion, $responsable);
+                        $resultado = $this->modeloAdministrador->addProfesorConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $institucion, $responsable, $rutaCarpeta);
 
                         if ($resultado == "ok") {
-                            move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Profesores");
+                            if (!file_exists($rutaCarpeta)) {
+                                move_uploaded_file($_FILES['foto']['tmp_name'], $carpeta_destino . $nombre_imagen);
+                                mkdir($_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año, 0777, true);
+                                echo "ok";
+                            } else {
+                                echo "existe";
+                            }
                         } else if ($resultado == "no") {
-                            echo "Rut Ya Registrado...";
+                            echo "error";
                         }
                     } else {
-                        echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                        echo "error2";
                     }
                 } else {
-                    echo "El tamaño de la imagen supera el limite";
+                    echo "error2";
                 }
             }
         } else {
@@ -1065,7 +1114,8 @@ class Administrador extends CI_Controller
 
                     $resultado = $this->modeloAdministrador->editarProfesorSinFoto($id, $rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $responsable, $estado);
 
-                    redirect("Profesores");
+
+                    echo "ok";
                 } else {
                     if ($tamano_imagen <= 10000000) {
                         if ($tipo_imagen == "image/jpeg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/jpj" || $tipo_imagen == "image/gif") {
@@ -1093,16 +1143,16 @@ class Administrador extends CI_Controller
 
                             unlink($carpeta_destino . $fotoantigua);
                             move_uploaded_file($_FILES['foto2']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Profesores");
+                            echo "ok";
                         } else {
-                            echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                            echo "error";
                         }
                     } else {
-                        echo "El tamaño de la imagen supera el limite";
+                        echo "error";
                     }
                 }
             } else {
-                echo "Selecciona el estado del Profesor...";
+                echo "falta";
             }
         } else {
             $this->load->view('Errormsg');
@@ -1130,7 +1180,7 @@ class Administrador extends CI_Controller
             $nacionalidad = $this->input->post("nacionalidad2");
             $apoderado = $this->input->post("apoderado2");
             $estado = $this->input->post("estado");
-            if ($estado != null || $apoderado != null || $nacionalidad != null) {
+            if ($estado != null && $apoderado != null && $nacionalidad != null) {
                 if ($nombre_imagen == null || $tipo_imagen == null || $tamano_imagen == null) {
                     $id = $this->input->post("id");
                     $rut = $this->input->post("username");
@@ -1143,7 +1193,7 @@ class Administrador extends CI_Controller
                     $time = strtotime($prueba);
                     $nacimiento = date('Y-m-d', $time);
                     $resultado = $this->modeloAdministrador->EditarAlumnoSinFoto($id, $rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $apoderado, $nacionalidad, $estado);
-                    redirect("Alumnos");
+                    echo "ok";
                 } else {
                     if ($tamano_imagen <= 10000000) {
                         if ($tipo_imagen == "image/jpeg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/jpj" || $tipo_imagen == "image/gif") {
@@ -1165,16 +1215,16 @@ class Administrador extends CI_Controller
 
                             unlink($carpeta_destino . $fotoantigua);
                             move_uploaded_file($_FILES['foto2']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Alumnos");
+                            echo "ok";
                         } else {
-                            echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                            echo "error";
                         }
                     } else {
-                        echo "El tamaño de la imagen supera el limite";
+                        echo "error";
                     }
                 }
             } else {
-                echo "Ingrese todos los datos...";
+                echo "falta";
             }
         } else {
             $this->load->view('Errormsg');
@@ -1202,7 +1252,7 @@ class Administrador extends CI_Controller
             $parentesco = $this->input->post("parentesco2");
             $estado = $this->input->post("estado2");
 
-            if ($parentesco != "" || $estado != "") {
+            if ($parentesco != null && $estado != null) {
                 if ($nombre_imagen == null || $tipo_imagen == null || $tamano_imagen == null) {
 
                     $id = $this->input->post("id");
@@ -1217,7 +1267,8 @@ class Administrador extends CI_Controller
                     $nacimiento = date('Y-m-d', $time);
                     $resultado = $this->modeloAdministrador->editarApoderadoSinFoto($id, $rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $parentesco, $estado);
 
-                    redirect("Apoderados");
+
+                    echo "ok";
                 } else {
                     if ($tamano_imagen <= 10000000) {
                         if ($tipo_imagen == "image/jpeg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/jpj" || $tipo_imagen == "image/gif") {
@@ -1238,16 +1289,16 @@ class Administrador extends CI_Controller
 
                             unlink($carpeta_destino . $fotoantigua);
                             move_uploaded_file($_FILES['foto2']['tmp_name'], $carpeta_destino . $nombre_imagen);
-                            redirect("Apoderados");
+                            echo "ok";
                         } else {
-                            echo "El formato de la imagen tiene que ser jpg, png, jpeg o gif.";
+                            echo "error";
                         }
                     } else {
-                        echo "El tamaño de la imagen supera el limite";
+                        echo "error";
                     }
                 }
             } else {
-                echo "Ingrese todos los datos...";
+                echo "falta";
             }
         } else {
             $this->load->view('Errormsg');
@@ -1258,15 +1309,16 @@ class Administrador extends CI_Controller
     {
         if (count($this->session->userdata("administrador")) > 0) {
             $id = $this->input->post("id");
+            $nombre = $this->input->post("nombre2");
+            $apellido = $this->input->post("apellido");
+            $letra = $this->input->post("letra");
+            $aneo = $this->input->post("aneo");
             $estado = $this->input->post("estado");
-            if ($estado == "Activo") {
-                $estado = 2;
-                $this->modeloAdministrador->editarEstadoCurso($id, $estado);
-                echo json_encode(array("msg" => "ok"));
-            } else if ($estado == "Inactivo") {
-                $estado = 1;
-                $this->modeloAdministrador->editarEstadoCurso($id, $estado);
-                echo json_encode(array("msg" => "ok"));
+            if ($nombre != null && $apellido != null && $letra != null && $aneo != null && $estado != null) {
+                $this->modeloAdministrador->editarEstadoCurso($id, $nombre, $apellido, $letra, $aneo, $estado);
+                echo "ok";
+            } else {
+                echo "falta";
             }
         } else {
             $this->load->view('Errormsg');
@@ -1415,6 +1467,7 @@ class Administrador extends CI_Controller
             $materias = $this->input->post("materias");
             $curso = $this->input->post("curso");
             $resultado = $this->modeloAdministrador->addMateriasCurso($materias, $curso, $institucion);
+
             if ($resultado == "ok") {
                 echo json_encode(array("msg" => "ok"));
             } else if ($resultado == "error") {
@@ -1577,7 +1630,7 @@ class Administrador extends CI_Controller
             $path = $_FILES["file"]["tmp_name"];
             $object = PHPExcel_IOFactory::load($path);
             $user = $this->session->userdata("administrador");
-            $contador = 0;
+            $idAntes = $this->modeloAdministrador->ultimoId();
             foreach ($object->getWorksheetIterator() as $worksheet) {
                 $highestRow = $worksheet->getHighestRow();
                 $highestColumn = $worksheet->getHighestColumn();
@@ -1589,7 +1642,7 @@ class Administrador extends CI_Controller
                     $numeroApoderado = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
                     $correoApoderado = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $parentescoApoderado = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-
+                    $foto = "sinfoto.png";
 
                     $claveApoderado = substr("$numeroApoderado", -4);
                     $data[] = array(
@@ -1604,46 +1657,81 @@ class Administrador extends CI_Controller
                         'responsableApoderado' => $user[0]->idAdministrador,
                         'institucionApoderado' => $user[0]->institucionAdministrador,
                         'estadoApoderado' => 1,
-                        'fotoApoderado' => 'sinfoto.png'
+                        'fotoApoderado' => $foto
 
                     );
-                    $contador++;
                 }
             }
-            $ultimoId = $this->modeloAdministrador->insertarExcelApoderado($data);
-            $ultimoId = $ultimoId+1;
-            foreach ($object->getWorksheetIterator() as $worksheet) {
-                $highestRow = $worksheet->getHighestRow();
-                $highestColumn = $worksheet->getHighestColumn();
+            $this->modeloAdministrador->insertarExcelApoderado($data);
 
-                for ($row = 2; $row <= $highestRow; $row++) {
-                    $rutAlumno = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-                    $nombresAlumno = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                    $apellidosAlumno = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-                    $fechaNacimientoAlumno = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-                    $numeroAlumno = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-                    $correoAlumno = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-                    $nacionalidadAlumno = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
-                    $claveAlumno = substr("$numeroAlumno", -4);
-                    $data2[] = array(
-                        'rutAlumno'        =>    strip_tags($rutAlumno),
-                        'nombresAlumno'            =>    strip_tags($nombresAlumno),
-                        'apellidosAlumno'                =>    strip_tags($apellidosAlumno),
-                        'fechaNacimientoAlumno'        =>    strip_tags($fechaNacimientoAlumno),
-                        'numeroAlumno'            =>    strip_tags($numeroAlumno),
-                        'correoAlumno' => strip_tags($correoAlumno),
-                        'apoderado_idApoderado' => $ultimoId++,
-                        'claveAlumno' => strip_tags($claveAlumno),
-                        'institucion_idInstitucion'            =>    $user[0]->institucionAdministrador,
-                        'nacionalidadAlumno' => strip_tags($nacionalidadAlumno),
-                        'responsableAlumno' => $user[0]->idAdministrador,
-                        'estadoAlumno' => 1,
-                        'fotoAlumno' => 'sinfoto.png'
-                    );
-                }
-            };
+
+
+            if ($idAntes == 0) {
+                $idAntes = 1;
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $rutAlumno = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $nombresAlumno = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $apellidosAlumno = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $fechaNacimientoAlumno = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $numeroAlumno = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $correoAlumno = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                        $nacionalidadAlumno = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                        $claveAlumno = substr("$numeroAlumno", -4);
+                        $data2[] = array(
+                            'rutAlumno'        =>    strip_tags($rutAlumno),
+                            'nombresAlumno'            =>    strip_tags($nombresAlumno),
+                            'apellidosAlumno'                =>    strip_tags($apellidosAlumno),
+                            'fechaNacimientoAlumno'        =>    strip_tags($fechaNacimientoAlumno),
+                            'numeroAlumno'            =>    strip_tags($numeroAlumno),
+                            'correoAlumno' => strip_tags($correoAlumno),
+                            'apoderado_idApoderado' => $idAntes++,
+                            'claveAlumno' => strip_tags($claveAlumno),
+                            'institucion_idInstitucion'            =>    $user[0]->institucionAdministrador,
+                            'nacionalidadAlumno' => strip_tags($nacionalidadAlumno),
+                            'responsableAlumno' => $user[0]->idAdministrador,
+                            'estadoAlumno' => 1,
+                            'fotoAlumno' => 'sinfoto.png'
+                        );
+                    }
+                };
+            } else {
+                foreach ($object->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet->getHighestRow();
+                    $highestColumn = $worksheet->getHighestColumn();
+
+                    for ($row = 2; $row <= $highestRow; $row++) {
+                        $rutAlumno = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                        $nombresAlumno = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                        $apellidosAlumno = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                        $fechaNacimientoAlumno = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                        $numeroAlumno = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                        $correoAlumno = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                        $nacionalidadAlumno = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                        $claveAlumno = substr("$numeroAlumno", -4);
+                        $data2[] = array(
+                            'rutAlumno'        =>    strip_tags($rutAlumno),
+                            'nombresAlumno'            =>    strip_tags($nombresAlumno),
+                            'apellidosAlumno'                =>    strip_tags($apellidosAlumno),
+                            'fechaNacimientoAlumno'        =>    strip_tags($fechaNacimientoAlumno),
+                            'numeroAlumno'            =>    strip_tags($numeroAlumno),
+                            'correoAlumno' => strip_tags($correoAlumno),
+                            'apoderado_idApoderado' => $idAntes++,
+                            'claveAlumno' => strip_tags($claveAlumno),
+                            'institucion_idInstitucion'            =>    $user[0]->institucionAdministrador,
+                            'nacionalidadAlumno' => strip_tags($nacionalidadAlumno),
+                            'responsableAlumno' => $user[0]->idAdministrador,
+                            'estadoAlumno' => 1,
+                            'fotoAlumno' => 'sinfoto.png'
+                        );
+                    }
+                };
+            }
             $this->modeloAdministrador->insertarExcelAlumno($data2);
-            echo 'funciono';
+            echo "Importacion Realizada con Exito";
         }
     }
 
@@ -1678,7 +1766,7 @@ class Administrador extends CI_Controller
                         'institucion_idInstitucion' => $user[0]->institucionAdministrador,
                         'estadoProfesor' => 1,
                         'fotoProfesor' => 'sinfoto.png'
-                    
+
 
                     );
                 }
@@ -1743,6 +1831,22 @@ class Administrador extends CI_Controller
             echo json_encode(array("msg" => "ok"));
         } else { }
     }
-
+    public function editarMateria()
+    {
+        if (count($this->session->userdata("administrador")) > 0) {
+            $id = $this->input->post("id");
+            $estado = $this->input->post("estado");
+            if ($estado == "Activo") {
+                $estado = 2;
+                $this->modeloAdministrador->editarEstadoMateria($id, $estado);
+                echo json_encode(array("msg" => "ok"));
+            } else if ($estado == "Inactivo") {
+                $estado = 1;
+                $this->modeloAdministrador->editarEstadoMateria($id, $estado);
+                echo json_encode(array("msg" => "ok"));
+            }
+        } else {
+            $this->load->view('Errormsg');
+        }
+    }
 }
-

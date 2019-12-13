@@ -75,7 +75,7 @@ $route['getTablaAlumnosTaller'] = 'Administrador/getTablaAlumnosTaller';
 $route['insertarExcelApoderado'] = 'Administrador/insertarExcelApoderado';
 $route['insertarExcelProfesor'] = 'Administrador/insertarExcelProfesor';
 $route['insertarExcelAlumno'] = 'Administrador/insertarExcelAlumno';
-
+$route['editarMateria'] = 'Administrador/editarMateria';
 
 
 
@@ -91,7 +91,11 @@ $route['InicioProfesor'] = 'Profesor/index';
 $route['inicioProfesorWeb'] = 'Profesor/inicioProfesorWeb';
 $route['Profesor'] = 'Profesor/menu';
 $route['Material'] = 'Profesor/material';
-
+$route['CarpetasProfesor'] = 'Profesor/mostrarCarpetaProfe';
+$route['CarpetaCursosProfesor'] = 'Profesor/carpetaCursosProfesor';
+$route['subirArchivo'] = 'Profesor/subirArchivo';
+$route['getMateriaCurso'] = 'Profesor/getMateriasProfesor';
+$route['verArchivosXCurso'] = 'Profesor/verArchivosXCurso';
 
 
 
@@ -137,3 +141,4 @@ $route['ImportarApoderados'] = 'Administrador/ImportarApoderados';
 $route['ImportarAlumnos'] = 'Administrador/ImportarAlumnos';
 
 $route['ImportarProfesores'] = 'Administrador/ImportarProfesores';
+$route['Busquedas'] = 'Administrador/Busquedas';

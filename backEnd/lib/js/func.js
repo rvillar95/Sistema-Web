@@ -1,4 +1,4 @@
-function checkRutOficial(rut) {
+function checkRutA(rut) {
     // Despejar Puntos
     var valor = rut.value.replace('.','');
     // Despejar Guión
@@ -70,4 +70,3 @@ function checkRutOficial(rut) {
     rut.value = sRut.toUpperCase();
     rut.setCustomValidity('');
 }
-

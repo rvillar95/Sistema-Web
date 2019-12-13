@@ -14,7 +14,7 @@
     <link href="<?php echo base_url() ?>lib/fonts/font-awesome.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>lib/css/animate.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>lib/css/style.css" rel="stylesheet">
-    
+
     <link href="<?php echo base_url() ?>lib/css/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>lib/css/mystyle.css" rel="stylesheet" type="text/css" />
 </head>
@@ -45,16 +45,13 @@
             </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
-                    <h2>Modulo Taller y Alumnos</h2>
+                    <h2>Modulo Busqueda</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="<?php echo base_url() ?>Administrador">Menu Principal</a>
                         </li>
-                        <li>
-                            <a href="<?php echo base_url() ?>Asignaciones">Menu Asignaciones</a>
-                        </li>
                         <li class="active">
-                            <strong>Modulo Taller y Alumnos</strong>
+                            <strong>Modulo Busqueda</strong>
                         </li>
                     </ol>
                 </div>
@@ -67,67 +64,113 @@
             </div>
             <div class="wrapper wrapper-content  animated fadeInRight">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title" style="background-color: #0d8ddb;">
-                                <h5 style="color: white">Taller y Alumnos </h5>
+                                <h5 style="color: white">Buscar Apoderado por Curso</h5>
+
                             </div>
                             <div class="ibox-content" style="padding: 0px;">
                                 <div class="row" style="padding: 20px;">
                                     <div class="col-md-12">
-                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label for="getSelectProfesor">Seleccionar Alumnos Asociados al</label>
-                                            <select class="form-control select2" multiple="" id="getSelectAlumnos">
+                                        <div class="form-group col-lg-3 col-md-3 col-sm-12 col-xs-12"><label for="getSelectProfesor">Siguiente Curso</label>
+                                            <select class="form-control" id="getSelectCurso">
 
                                             </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label for="getSelectProfesor">Siguiente Taller</label>
-                                            <select class="form-control" id="getSelectTaller">
-
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><button type="submit" id="btnAgregarRelacion" class="btn btn-primary" style="background-color: black; color: white; ">Registrar Relación</button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title" style="background-color: #0d8ddb;">
-                                <h5 style="color: white">Relacion Taller-Alumno </h5>
-                            </div>
-                            <div class="ibox-content" style="padding: 0px;">
-                                <div class="row" style="padding: 20px;">
-                                    <div class="col-md-12">
-                                        <div class="row" style="padding: 20px;">
-                                            <h2><strong>Registros Taller-Alumno</strong></h2>
-                                            <div class="table-responsive">
-                                                <table id="tabla_Taller" class="table table-striped table-bordered table-hover dataTables-Taller">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th>ID</th>
-                                                            <th>Nombre Taller</th>
-                                                            <th>Inicio</th>
-                                                            <th>Termino</th>
-                                                            <th>Profesor</th>
-                                                            <th>Alumnos</th>
-                                                            <th>Ver Alumnos</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #0d8ddb;">
+                                <h5 style="color: white">Tabla Parentescos</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content" style="padding: 0px;">
+                                <div class="row" style="padding: 20px;">
+                                    <h2><strong>Registros de Parentescos</strong></h2>
+                                    <div class="table-responsive">
+                                        <table id="tabla_parentesco" class="table table-striped table-bordered table-hover dataTables-parentesco">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #0d8ddb;">
+                                <h5 style="color: white">Crear Nacionalidad</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content" style="padding: 0px;">
+                                <div class="row" style="padding: 20px;">
+                                    <div class="col-md-12">
+                                        <br />
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Nombre Nacionalidad</label> <input required type="text" id="nacionalidad" placeholder="Ingrese nombre de la Nacionalidad" class="form-control"></div>
+                                        <div class="form-group form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"><button type="submit" id="btnAgregarNacionalidad" class="btn btn-primary" style="background-color: black; color: white; ">Agregar Nacionalidad</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #0d8ddb;">
+                                <h5 style="color: white">Tabla Nacionalidad</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content" style="padding: 0px;">
+                                <div class="row" style="padding: 20px;">
+                                    <h2><strong>Registros de Nacionalidad</strong></h2>
+                                    <div class="table-responsive">
+                                        <table id="tabla_nacionalidad" class="table table-striped table-bordered table-hover dataTables-nacionalidad">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
             </div>
             <div class="footer">
                 <div class="pull-right">
@@ -141,48 +184,10 @@
         </div>
     </div>
 
-    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Ver Alumnos Asociados</h4>
-                    <small class="font-bold">En este modal podras ver todos los alumnos asociados a un Taller.</small>
-                </div>
-                <div class="modal-body">
 
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-
-                                            <th>ID </th>
-                                            <th>Rut </th>
-                                            <th>Nombre</th>
-                                            <th>Numero</th>
-                                            <th>Correo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbodyDetalle">
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- ./wrapper -->
 
     <!-- jQuery 3 -->
-
-
     <script src="<?php echo base_url() ?>lib/js/rut" type="text/javascript"></script>
     <script src="<?php echo base_url() ?>lib/js/jquery-2.1.1.js"></script>
     <script src="<?php echo base_url() ?>lib/js/bootstrap.min.js"></script>
@@ -202,10 +207,9 @@
         $(function() {
 
             $(document).ready(function() {
-                getSelectAlumnos();
-                getSelectTaller();
+                getSelectCurso();
 
-                $('.dataTables-Taller').DataTable({
+                $('.dataTables-parentesco').DataTable({
                     language: {
                         "sProcessing": "Procesando...",
                         "sLengthMenu": "Registros _MENU_ ",
@@ -235,16 +239,10 @@
                         }
                     },
                     "ajax": {
-                        url: "<?php echo site_url() ?>getTotalTalleresAlumnos",
+                        url: "<?php echo site_url() ?>getTablaParentesco",
                         type: 'GET'
                     },
-                    "columnDefs": [{
-                            "targets": 6,
-                            "data": null,
-                            "defaultContent": '<button type="button" id="btnVerAlumnos" class="btn btn-info" data-toggle="modal" data-target="#myModal5"><i class="glyphicon glyphicon-pencil"></i></button>'
-                        }
 
-                    ],
                     dom: '<"html5buttons"B>lTfgitp',
                     buttons: [{
                             extend: 'copy'
@@ -254,11 +252,11 @@
                         },
                         {
                             extend: 'excel',
-                            title: 'Lista de Curso - Alumno'
+                            title: 'Lista de Parentescos'
                         },
                         {
                             extend: 'pdf',
-                            title: 'Lista de Curso - Alumno'
+                            title: 'Lista de Parentescos'
                         },
                         {
                             extend: 'print',
@@ -273,35 +271,50 @@
                     ]
 
                 });
+                $('.dataTables-nacionalidad').DataTable({
+                    "ajax": {
+                        url: "<?php echo site_url() ?>getTablaNacionalidad",
+                        type: 'GET'
+                    },
 
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [{
+                            extend: 'copy'
+                        },
+                        {
+                            extend: 'csv'
+                        },
+                        {
+                            extend: 'excel',
+                            title: 'Lista de Nacionalidad'
+                        },
+                        {
+                            extend: 'pdf',
+                            title: 'Lista de Nacionalidad'
+                        },
+                        {
+                            extend: 'print',
+                            customize: function(win) {
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+                                $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                            }
+                        }
+                    ]
+
+                });
                 // Add slimscroll to element
                 $('.scroll_content').slimscroll({
                     height: '200px'
                 });
+
                 $("#btn").click(function(e) {
                     e.preventDefault();
                     salir();
                 });
-
-                $("body").on("click", "#btnVerAlumnos", function(e) {
-                    e.preventDefault();
-                    var id = $(this).parent().parent().children()[0];
-                    getTablaAlumnosTaller($(id).text());
-
-                });
-
-                $("#btnAgregarRelacion").click(function(e) {
-                    e.preventDefault();
-                    addRelacionAlumnoTaller();
-                    var table = $('#tabla_Taller').DataTable();
-                    table.ajax.reload(function(json) {
-                        $('#btnAgregarRelacion').val(json.lastInput);
-                    });
-                });
             });
-
-
-
         });
     </script>
 </body>

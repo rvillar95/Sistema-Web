@@ -72,55 +72,17 @@
                             </div>
                             <div class="ibox-content" style="padding: 0px;">
                                 <div class="row" style="padding: 20px;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" id="carpeta_maestra">
                                         <br />
                                         <div id="jstree1" class="jstree jstree-1 jstree-default" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j1_1" aria-busy="false">
                                             <ul class="jstree-container-ul jstree-children" role="group">
                                                 <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j1_1_anchor" aria-expanded="true" id="j1_1" class="jstree-node  jstree-open jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_1_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>Admin theme
                                                     </a>
-                                                    <ul role="group" class="jstree-children">
-                                                        <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="j1_2_anchor" aria-expanded="false" id="j1_2" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_2_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>css
-                                                            </a></li>
-                                                        <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="j1_6_anchor" aria-expanded="false" id="j1_6" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_6_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>email-templates
-                                                            </a></li>
-                                                        <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="j1_10_anchor" aria-expanded="false" id="j1_10" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_10_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>fonts
-                                                            </a></li>
-                                                        <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="j1_15_anchor" aria-expanded="true" id="j1_15" class="jstree-node  jstree-open"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_15_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>img
-                                                            </a>
-                                                            <ul role="group" class="jstree-children">
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;img&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_16_anchor" id="j1_16" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_16_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>profile_small.jpg</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;img&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_17_anchor" id="j1_17" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_17_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>angular_logo.png</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;img&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_18_anchor" id="j1_18" class="jstree-node text-navy jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_18_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>html_logo.png</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;img&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_19_anchor" id="j1_19" class="jstree-node text-navy jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_19_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>mvc_logo.png</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="j1_20_anchor" aria-expanded="true" id="j1_20" class="jstree-node  jstree-open"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_20_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>js
-                                                            </a>
-                                                            <ul role="group" class="jstree-children">
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;js&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_21_anchor" id="j1_21" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_21_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>inspinia.js</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;js&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_22_anchor" id="j1_22" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_22_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>bootstrap.js</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;js&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_23_anchor" id="j1_23" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_23_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>jquery-2.1.1.js</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;js&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_24_anchor" id="j1_24" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_24_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>jquery-ui.custom.min.js</a></li>
-                                                                <li role="treeitem" data-jstree="&quot;type&quot;:&quot;js&quot;}" aria-selected="false" aria-level="3" aria-labelledby="j1_25_anchor" id="j1_25" class="jstree-node text-navy jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_25_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>jquery-ui-1.10.4.min.js</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_26_anchor" id="j1_26" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_26_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> affix.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_27_anchor" id="j1_27" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_27_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> dashboard.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_28_anchor" id="j1_28" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_28_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> buttons.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_29_anchor" id="j1_29" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_29_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> calendar.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_30_anchor" id="j1_30" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_30_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> contacts.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_31_anchor" id="j1_31" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_31_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> css_animation.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_32_anchor" id="j1_32" class="jstree-node text-navy jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_32_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> flot_chart.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_33_anchor" id="j1_33" class="jstree-node text-navy jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_33_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> google_maps.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_34_anchor" id="j1_34" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_34_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> icons.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_35_anchor" id="j1_35" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_35_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> invoice.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_36_anchor" id="j1_36" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_36_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> login.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_37_anchor" id="j1_37" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_37_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> mailbox.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_38_anchor" id="j1_38" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_38_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> profile.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_39_anchor" id="j1_39" class="jstree-node text-navy jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_39_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> register.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_40_anchor" id="j1_40" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_40_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> timeline.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_41_anchor" id="j1_41" class="jstree-node  jstree-leaf"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_41_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> video.html</a></li>
-                                                        <li role="treeitem" data-jstree="&quot;type&quot;:&quot;html&quot;}" aria-selected="false" aria-level="2" aria-labelledby="j1_42_anchor" id="j1_42" class="jstree-node  jstree-leaf jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_42_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i> widgets.html</a></li>
+                                                    <ul role="group" class="jstree-children" id="cursos">
+
+
+
+
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -145,7 +107,41 @@
 
         </div>
     </div>
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-folder modal-icon"></i>
+                    <h4 class="modal-title">Subir Archivo</h4>
+                    <small class="font-bold">En este modal podras subir el archivo que tu desees a tu curso asignado.</small>
+                </div>
 
+                <div class="modal-body">
+                    <form id="prueba" method="POST" enctype="multipart/form-data">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label for="getSelectProfesor">Materias del Curso Seleccionado</label>
+                            <select required class="form-control" id="getSelectMaterias" name="materiaselect">
+
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Descripcion del Material a subir</label> <input required type="text" name="descripcion" class="form-control" name="descripcion">
+
+                            </textarea></div>
+                        <div class="form-group"><label class="col-lg-2 control-label">Archivo</label>
+                            <input class="hidden" type="text" name="idCurso" id="idCurso">
+                            <input class="hidden" type="text" name="curso" id="curso">
+                            <input class="hidden" type="text" name="ruta" id="ruta">
+
+                            <div class="col-lg-10"><input type="file" required placeholder="Seleccionar archivo" name="arch" class="form-control"> <span class="help-block m-b-none">Seleccione el archivo a subir.</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: black; color: white; ">Subir Material</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ./wrapper -->
 
@@ -167,12 +163,95 @@
         $(function() {
 
             $(document).ready(function() {
-
+                carpetaMaestra();
 
                 // Add slimscroll to element
                 $('.scroll_content').slimscroll({
                     height: '200px'
                 })
+
+                $("#boton").click(function(e) {
+                    e.preventDefault();
+
+
+                });
+
+                $('#prueba').on('submit', function(event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>subirArchivo",
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(data) {
+
+                        
+                            if (data == "ok") {
+                                toastr.success("", "Archivo subido con exito")
+                            } else if (data == "error") {
+                                toastr.warning("", "Error al subir archivo")
+                            }  else if (data == "falta") {
+                                toastr.warning("", "Faltan datos por completar.")
+                            }
+                        }
+                    })
+                });
+
+                $("body").on("click", "#boton", function(e) {
+                    e.preventDefault();
+                    var id = $(this).val();
+                    if (!$("#j1_1").hasClass("jstree-closed") && $("#j1_1").hasClass("jstree-open")) {
+                        $("j1_1").addClass("jstree-closed");
+                        $('#j1_1').removeClass('jstree-open');
+                        $("#cursos").empty();
+                    } else {
+                        $('#j1_1').addClass('jstree-open');
+                        $('#j1_1').removeClass('jstree-closed');
+                        carpetaCursosProfesor(id);
+                    }
+
+
+
+
+                });
+                $("body").on("click", "#verArchivosCarpeta", function(e) {
+                    e.preventDefault();
+                    var id = $(this).val();
+                    var palabra = "#archivos" + id;
+                    var li = "#j" + id;
+                    if (!$(li).hasClass("jstree-closed") && $(li).hasClass("jstree-open")) {
+
+                        $(li).addClass("jstree-closed");
+                        $(li).removeClass('jstree-open');
+                        $(palabra).empty();
+                    } else {
+                        $(li).addClass('jstree-open');
+                        $(li).removeClass('jstree-closed');
+                        verArchivosCurso(id);
+                    }
+
+
+
+                });
+
+                $("body").on("click", "#botoncurso", function(e) {
+                    e.preventDefault();
+                    var datos = $(this).val();
+                    var fila = datos.split(",");
+                    var id = fila[0];
+                    var ruta = fila[1];
+
+                    $("#idCurso").val(id);
+                    $("#ruta").val(ruta);
+                    getSelectMateriasCurso(id);
+
+
+                });
+
+
+
                 $("#btn").click(function(e) {
                     e.preventDefault();
                     salir();

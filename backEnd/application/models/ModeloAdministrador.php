@@ -164,7 +164,7 @@ class ModeloAdministrador extends CI_Model
             "institucion_idInstitucion" => strip_tags($institucion),
             "estadoTaller" => 1
         );
-        $this->db->insert("taller",$this->security->xss_clean($data));
+        $this->db->insert("taller", $this->security->xss_clean($data));
         return "ok";
     }
 
@@ -249,7 +249,7 @@ class ModeloAdministrador extends CI_Model
                 "nacionalidadAlumno" => strip_tags($nacionalidad),
                 "responsableAlumno" => strip_tags($responsable),
                 "estadoAlumno" => 1,
-                "fotoAlumno"=>'sinfoto.png'
+                "fotoAlumno" => 'sinfoto.png'
             );
             $this->db->insert("alumno", $this->security->xss_clean($data));
             return "ok";
@@ -325,7 +325,7 @@ class ModeloAdministrador extends CI_Model
                 "responsableApoderado" => strip_tags($responsable),
                 "institucionApoderado" => strip_tags($institucion),
                 "estadoApoderado" => 1,
-                "fotoApoderado"=>'sinfoto.png'
+                "fotoApoderado" => 'sinfoto.png'
             );
             $this->db->insert("apoderado", $this->security->xss_clean($data));
             return "ok";
@@ -382,13 +382,18 @@ class ModeloAdministrador extends CI_Model
         return $this->db->get();
     }
 
-    function addProfesorSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $institucion, $responsable)
+    function addProfesorSinFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $clave, $institucion, $responsable, $rutaCarpeta)
     {
 
         $this->db->select('count (*)');
         $this->db->from('profesor');
         $this->db->where('rutProfesor', $rut);
         $resultado = $this->db->count_all_results();
+
+        $this->db->select('MAX(idProfesor) AS "id"');
+        $var = $this->db->get("profesor")->result();
+        $ultimo = ($var[0]->id) + 1;
+
         if ($resultado == 0) {
             $data = array(
                 "rutProfesor" => strip_tags($rut),
@@ -401,9 +406,18 @@ class ModeloAdministrador extends CI_Model
                 "institucion_idInstitucion" => strip_tags($institucion),
                 "responsableProfesor" => strip_tags($responsable),
                 "estadoProfesor" => 1,
-                "fotoProfesor"=>'sinfoto.png'
+                "fotoProfesor" => 'sinfoto.png'
             );
+
+            $data2 = array(
+                "nombreCarpeta_Profesor" => strip_tags($rut),
+                "descripcionCarpeta_Profesor" => "Profesor " . strip_tags($nombre) . " " . strip_tags($apellido),
+                "rutaCarpeta_Profesor" => strip_tags($rutaCarpeta),
+                "profesor_idProfesor" => strip_tags($ultimo)
+            );
+
             $this->db->insert("profesor", $this->security->xss_clean($data));
+            $this->db->insert("carpeta_profesor", $this->security->xss_clean($data2));
             return "ok";
         } else {
             return "no";
@@ -411,9 +425,13 @@ class ModeloAdministrador extends CI_Model
         return "error";
     }
 
-    function addProfesorConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $institucion, $responsable)
+    function addProfesorConFoto($rut, $nombre, $apellido, $nacimiento, $numero, $correo, $nombre_imagen, $clave, $institucion, $responsable, $rutaCarpeta)
     {
 
+        $this->db->select('MAX(idProfesor) AS "id"');
+        $var = $this->db->get("profesor")->result();
+        $ultimo = ($var[0]->id) + 1;
+        $año = date('Y');
         $this->db->select('count (*)');
         $this->db->from('profesor');
         $this->db->where('rutProfesor', $rut);
@@ -432,7 +450,15 @@ class ModeloAdministrador extends CI_Model
                 "responsableProfesor" => strip_tags($responsable),
                 "estadoProfesor" => 1
             );
+
+            $data2 = array(
+                "nombreCarpeta_Profesor" => strip_tags($rut . '_' . $año),
+                "descripcionCarpeta_Profesor" => "Profesor " . strip_tags($nombre) . " " . strip_tags($apellido),
+                "rutaCarpeta_Profesor" => strip_tags($rutaCarpeta),
+                "profesor_idProfesor" => strip_tags($ultimo)
+            );
             $this->db->insert("profesor", $this->security->xss_clean($data));
+            $this->db->insert("carpeta_profesor", $this->security->xss_clean($data2));
             return "ok";
         } else {
             return "no";
@@ -586,12 +612,20 @@ class ModeloAdministrador extends CI_Model
         $this->db->update("apoderado", $data);
     }
 
-    function editarEstadoCurso($id, $estado)
+    function editarEstadoCurso($id, $nombre, $apellido, $letra, $aneo, $estado)
     {
-        $data = array("estadoCurso" => $estado);
+        $data = array(
+            "nombreCurso" => $nombre,
+            "gradoCurso" => $apellido,
+            "anno_escolar_idAnno_Escolar" => $aneo,
+            "letra_curso_idLetra_Curso" => $letra,
+            "estadoCurso" => $estado
+
+        );
         $this->db->where('idCurso', $id);
         return $this->db->update("curso", $data);
     }
+
 
     function getSelectCurso($institucion)
     {
@@ -634,9 +668,35 @@ class ModeloAdministrador extends CI_Model
 
     function addProfesorCurso($profesor, $curso, $institucion)
     {
+
+
         $ok = "";
         $error = "";
+
+
         foreach ($profesor as $value) {
+            $this->db->select('rutProfesor');
+            $this->db->where('idProfesor', $value);
+            $var = $this->db->get("profesor")->result();
+            $rut = ($var[0]->rutProfesor);
+
+            $this->db->select('idCarpeta_Profesor');
+            $this->db->where('profesor_idProfesor', $value);
+            $var = $this->db->get("carpeta_profesor")->result();
+            $id = ($var[0]->idCarpeta_Profesor);
+
+            $this->db->select("c.curso_idCurso, concat(o.nombreCurso,' ',o.gradoCurso,' ',l.nombreLetra_Curso,' ',a.nombreAnno_Escolar) as nombreCurso,count(*) as total");
+            $this->db->from("curso_profesor c");
+            $this->db->join("curso o", "o.idCurso = c.curso_idCurso");
+            $this->db->join("profesor p", "p.idProfesor = c.profesor_idProfesor");
+            $this->db->join("anno_escolar a", "a.idAnno_Escolar = o.anno_escolar_idAnno_Escolar");
+            $this->db->join("letra_curso l", "l.idLetra_Curso = o.letra_curso_idLetra_Curso");
+            $this->db->where('c.curso_idCurso', $curso);
+            $nombre = $this->db->get()->result();
+            $nombreCurso = $nombre[0]->nombreCurso;
+            $año = date('Y');
+            $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . "_" . $año . "/" . $nombreCurso;
+
             $this->db->select('count (*)');
             $this->db->from('curso_profesor');
             $this->db->where('profesor_idProfesor', $value);
@@ -649,7 +709,22 @@ class ModeloAdministrador extends CI_Model
                     "curso_idCurso" => strip_tags($curso),
                     "institucion_idInstitucion" => strip_tags($institucion)
                 );
+
+                mkdir($rutaCarpeta, 0777, true);
+
+
                 $this->db->insert("curso_profesor", $this->security->xss_clean($data));
+                $this->db->select('MAX(idCurso_Profesor) AS "id"');
+                $var = $this->db->get("curso_profesor")->result();
+                $ultimo = ($var[0]->id);
+                $data2 = array(
+                    "nombreCarpeta_CursoProfesor" => strip_tags($nombreCurso),
+                    "descripcionCarpeta_CursoProfesor" => strip_tags(" "),
+                    "rutaCarpeta_CursoProfesor" => strip_tags($rutaCarpeta),
+                    "cursoprofesor_idCursoProfesor" => strip_tags($ultimo),
+                    "carpetaProfesor" => strip_tags($id),
+                );
+                $this->db->insert("carpeta_curso_profesor", $this->security->xss_clean($data2));
                 $ok = "Ok";
             } else {
                 $error = "Error";
@@ -907,18 +982,60 @@ class ModeloAdministrador extends CI_Model
         $this->db->select('MAX(idApoderado) AS "id"');
         $var = $this->db->get("apoderado")->result();
         $ultimo = ($var[0]->id);
+        $this->db->trans_begin();
+        foreach ($data as $value) {
+            $this->db->insert('apoderado', $this->security->xss_clean($value));
+        }
 
-        $this->db->insert_batch('apoderado', $this->security->xss_clean($data));
+        if ($this->db->trans_status()  ===  FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
+
+        return $ultimo;
+    }
+
+    function ultimoId()
+    {
+        $this->db->select('MAX(idApoderado) AS "id"');
+        $var = $this->db->get("apoderado")->result();
+        $ultimo = ($var[0]->id);
         return $ultimo;
     }
 
     function insertarExcelProfesor($data)
     {
-        $this->db->insert_batch('profesor', $this->security->xss_clean($data));
+        $this->db->trans_begin();
+
+        foreach ($data as $value) {
+            $this->db->insert('profesor', $this->security->xss_clean($value));
+        }
+        if ($this->db->trans_status()  ===  FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
     }
 
     function insertarExcelAlumno($data)
     {
-        $this->db->insert_batch('alumno', $this->security->xss_clean($data));
+        $this->db->trans_begin();
+
+        foreach ($data as $value) {
+            $this->db->insert('alumno', $this->security->xss_clean($value));
+        }
+        if ($this->db->trans_status()  ===  FALSE) {
+            $this->db->trans_rollback();
+        } else {
+            $this->db->trans_commit();
+        }
+    }
+
+    function editarEstadoMateria($id, $estado)
+    {
+        $data = array("estadoMateria" => $estado);
+        $this->db->where('idMateria', $id);
+        return $this->db->update("materia", $data);
     }
 }

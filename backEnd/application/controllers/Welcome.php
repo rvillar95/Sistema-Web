@@ -18,7 +18,7 @@ class Welcome extends CI_Controller {
         $clave = $this->input->post("clave");
         $user = $this->indexModel->inicioProfesor($rut, $clave);
         if (count($user) > 0) {
-            $this->session->set_userdata("administrador", $user);
+            $this->session->set_userdata("profesor", $user);
             echo json_encode(array($user));
         } else {
             echo json_encode(array("msg" => "chao"));

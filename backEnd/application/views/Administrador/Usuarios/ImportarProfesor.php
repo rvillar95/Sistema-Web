@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Libreta Virtual | Menu Administrador</title>
+    <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="<?php echo base_url() ?>lib/img/favicon.png">
     <link href="<?php echo base_url() ?>lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>lib/fonts/font-awesome.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>lib/css/animate.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>lib/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>lib/css/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url() ?>lib/css/mystyle.css" rel="stylesheet" type="text/css" />
 </head>
@@ -167,12 +167,40 @@
                         table.ajax.reload(function(json) {
                             $('#imp').val(json.lastInput);
                         });
-                        alert(data);
+                        toastr.success("", data)
                     }
                 })
             });
 
             $('.dataTables-profesor').DataTable({
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Registros _MENU_ ",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla =(",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                },
                 "ajax": {
                     url: "<?php echo site_url() ?>getTablaProfesor",
                     type: 'GET'

@@ -8,12 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Libreta Virtual | Menu Administrador</title>
+        <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="<?php echo base_url() ?>lib/img/favicon.png">
         <link href="<?php echo base_url() ?>lib/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/fonts/font-awesome.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/css/animate.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css"/>
+      
         <link href="<?php echo base_url() ?>lib/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>lib/css/mystyle.css" rel="stylesheet" type="text/css"/>
     </head>

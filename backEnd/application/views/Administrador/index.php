@@ -8,12 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>Libreta Virtual | Menu Administrador</title>
+        <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="<?php echo base_url() ?>lib/img/favicon.png">
         <link href="<?php echo base_url() ?>lib/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/fonts/font-awesome.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/css/animate.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>lib/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url() ?>lib/css/toastr.min.css" rel="stylesheet" type="text/css"/>
+        
         <link href="<?php echo base_url() ?>lib/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>lib/css/mystyle.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -173,6 +174,22 @@
                                         <center>
                                             <div class="div-img sty" >
                                                 <img src="<?php echo base_url() ?>lib/img/otros.jpg"  class="img-responsive img" alt=""/>
+                                            </div>
+                                        </center>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title" style="background-color: #0d8ddb;">
+                                    <h5 style="color: white">Busquedas</h5> 
+                                </div>
+                                <div class="ibox-content" style="padding: 0px;">
+                                    <a href=" <?php echo base_url(); ?>Busquedas">
+                                        <center>
+                                            <div class="div-img sty" >
+                                                <img src="<?php echo base_url() ?>lib/img/busqueda.jpg"  class="img-responsive img" alt=""/>
                                             </div>
                                         </center>
                                     </a>

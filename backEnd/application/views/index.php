@@ -28,15 +28,10 @@
                     <h1 class="logo-name">   <img src="<?php echo base_url() ?>lib/img/logo-login.png" class="img-responsive" alt=""/></h1>
 
                     <h3 style="color:white;">Bienvenido a Libreta Virtual</h3>
-                    <p style="color:white">En este sistema podras gestionar tu institución.
-                        <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-                    </p>
-                    <p style="color:white;">Ingresa tu RUT y CONTRASEÑA</p>
-                    <!-- <div class="form-group">
-                         <input type="text"  id="rutUsuario" name="rut" required onblur="checkRutLogin(rutUsuario)" onkeypress="return check(event)" class="form-control soloNumeros"  placeholder="11111111-k">
-                     </div>-->
+               
+                 
                     <form id="login" name="login" method="post" autocomplete="off" target="_top">
-                        <div class="form-group"><label>Rut</label><input id="rutUsuario" type="text" name="j_username" placeholder="Rut" class="form-control" autocomplete="off" onfocus="rut(this.value);" onkeypress="return esRutLogin(event)" onkeyup="this.value = this.value.toUpperCase();" onblur="formatoRut()"></div>
+                        <div class="form-group"><input id="rutUsuario" type="text" name="j_username" placeholder="Rut" class="form-control" autocomplete="off" onfocus="rut(this.value);" onkeypress="return esRutLogin(event)" onkeyup="this.value = this.value.toUpperCase();" onblur="formatoRut()"></div>
                         <div class="form-group">
                             <input type="password" class="form-control" id="clave" placeholder="Clave">
                         </div>

@@ -118,6 +118,19 @@ function getAnnoEscolar() {
     });
 }
 
+function getAnnoEscolar2() {
+    var hola = 'http://127.0.0.1/Tesis/backEnd/getSelectAnnoEscolar';
+    $("#getAnnoEscolar2").empty();
+    var fila = "<option disabled selected>Seleccione el Año Escolar</option>";
+    $.getJSON(hola, function (result) {
+        $.each(result, function (i, o) {
+            fila += "<option value='" + o.idAnno_Escolar + "'>" + o.nombreAnno_Escolar + "</option>";
+        });
+        $("#getAnnoEscolar2").append(fila);
+    });
+}
+
+
 function getLetraCurso() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getLetraCurso';
     $("#getLetraCurso").empty();
@@ -127,6 +140,18 @@ function getLetraCurso() {
             fila += "<option value='" + o.idLetra_Curso + "'>" + o.nombreLetra_Curso + "</option>";
         });
         $("#getLetraCurso").append(fila);
+    });
+}
+
+function getLetraCurso2() {
+    var hola = 'http://127.0.0.1/Tesis/backEnd/getLetraCurso';
+    $("#getLetraCurso2").empty();
+    var fila = "<option disabled selected>Seleccione la Letra del Curso</option>";
+    $.getJSON(hola, function (result) {
+        $.each(result, function (i, o) {
+            fila += "<option value='" + o.idLetra_Curso + "'>" + o.nombreLetra_Curso + "</option>";
+        });
+        $("#getLetraCurso2").append(fila);
     });
 }
 
@@ -246,7 +271,7 @@ function getDatosInstitucion() {
     var fila = "";
     $.getJSON(hola, function (result) {
         $.each(result, function (i, o) {
-            fila += '<form  method="post" action="http://127.0.0.1/Tesis/backEnd/editarInstitucion" enctype="multipart/form-data" ><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>ID Institución</label><input disabled required  placeholder="ID de la Institución" value="' + o.idInstitucion + '" type="text" name="nombre" class="form-control" ></div> <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Nombre Institución</label><input required id="nombre" value="' + o.nombreInstitucion + '" placeholder="Nombre de la Institucion" type="text" name="nombre" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Descripción Institución</label><input required id="descripcion" value="' + o.descripcionInstitucion + '" placeholder="Descripcion de la Institución" type="text" name="descripcion" class="form-control" ></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Ciudad Institución</label><input required id="ciudad" value="' + o.ciudadInstitucion + '" placeholder="Ciudad de la Institución" type="text" name="ciudad" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion</label><br/><img style="width:50px; height=50px;" src="http://127.0.0.1/Tesis/backEnd/lib/img/Institucion/' + o.logoInstitucion + '""></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion Nuevo</label> <input type="file" name="foto" placeholder="Seleccione el archivo" class="form-control"></div> <div class="form-group form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"><button type="submit" id="btnEditarDatos"  class="btn btn-primary" style="background-color: black; color: white; ">Editar Datos</button></div><input type="text" name="fotoantigua" value="' + o.logoInstitucion + '" class="hidden"></form> ';
+            fila += '<form  id="prueba" method="post"  enctype="multipart/form-data" ><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>ID Institución</label><input disabled required  placeholder="ID de la Institución" value="' + o.idInstitucion + '" type="text" name="nombre" class="form-control" ></div> <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Nombre Institución</label><input required id="nombre" value="' + o.nombreInstitucion + '" placeholder="Nombre de la Institucion" type="text" name="nombre" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Descripción Institución</label><input required id="descripcion" value="' + o.descripcionInstitucion + '" placeholder="Descripcion de la Institución" type="text" name="descripcion" class="form-control" ></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Ciudad Institución</label><input required id="ciudad" value="' + o.ciudadInstitucion + '" placeholder="Ciudad de la Institución" type="text" name="ciudad" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion</label><br/><img style="width:50px; height=50px;" src="http://127.0.0.1/Tesis/backEnd/lib/img/Institucion/' + o.logoInstitucion + '""></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion Nuevo</label> <input type="file" name="foto" placeholder="Seleccione el archivo" class="form-control"></div> <div class="form-group form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"><button type="submit" id="btn2"  class="btn btn-primary" style="background-color: black; color: white; ">Editar Datos</button></div><input type="text" name="fotoantigua" value="' + o.logoInstitucion + '" class="hidden"></form> ';
         });
         $("#info-institucion").append(fila);
     });
@@ -349,10 +374,15 @@ function getDatosProfesor(id) {
     }).then(function (msg) {
         $("#info-profesores").empty();
         var fila = "";
-        getSelectEstado();
+        
         $.each(msg, function (i, o) {
-            fila += '<div class="row" style="padding:20px;"><form id="login2" name="login2"  method="post" action="http://127.0.0.1/Tesis/backEnd/editarProfesor" enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idProfesor + '" placeholder="Ingrese ID del Profesor" class="form-control"> <input required type="text" name="id"  value="' + o.idProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutProfesor + '" placeholder="Rut" class="form-control" autocomplete="off" onfocus="rut2(this.value);" onkeypress="return esRutLogin2(event)"  onkeyup="this.value = this.value.toUpperCase();" onblur="formatoRut2()"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Profesor</label> <input required type="text" name="nombre2" value="' + o.nombresProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Profesor</label> <input required type="text" name="apellido2" value="' + o.apellidosProfesor + '" placeholder="Ingrese apellido del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Profesor</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoProfesor + '" placeholder="Ingrese Fecha Nacimiento del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Profesor</label> <input required type="text" name="numero2" value="' + o.numeroProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Profesor</label> <input required type="text" name="clave2" value="' + o.claveProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Profesor</label> <input required type="email" name="correo2" value="' + o.correoProfesor + '" placeholder="Ingrese Correo del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Profesores/' + o.fotoProfesor + '"></div>                                                                                              <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>    <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"  required name="estado"></select>  </div>                                        <div class="form-group form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" style="background-color: black; color: white; ">Editar Profesor</button></div><input type="text" value="' + o.fotoProfesor + '" name="fotoantigua" class="hidden"></form></div>';
+            fila += '<div class="row" style="padding:20px;"><form id="editPro" name="login2"  enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idProfesor + '" placeholder="Ingrese ID del Profesor" class="form-control"> <input required type="text" name="id"  value="' + o.idProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutProfesor + '" placeholder="Rut" class="form-control" autocomplete="off" oninput="checkRutA(this)" ></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Profesor</label> <input required type="text" name="nombre2" value="' + o.nombresProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Profesor</label> <input required type="text" name="apellido2" value="' + o.apellidosProfesor + '" placeholder="Ingrese apellido del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Profesor</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoProfesor + '" placeholder="Ingrese Fecha Nacimiento del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Profesor</label> <input required type="text" name="numero2" value="' + o.numeroProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Profesor</label> <input required type="text" name="clave2" value="' + o.claveProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Profesor</label> <input required type="email" name="correo2" value="' + o.correoProfesor + '" placeholder="Ingrese Correo del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Profesores/' + o.fotoProfesor + '"></div>                                                                                              <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>    <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"   required name="estado"></select>  </div>                                        <div class="form-group form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Profesor</button></div><input type="text" value="' + o.fotoProfesor + '" name="fotoantigua" class="hidden"></form></div>';
+            getSelectEstado();
+            $("#getSelectEstado > option[value='" + o.estadoProfesor + "']").attr("selected", true);
             $("#info-profesores").append(fila);
+            $('#getSelectEstado > option[value="3"]').attr('selected', 'selected');
+            
+
         });
     });
 }
@@ -371,7 +401,7 @@ function getDatosAlumno(id) {
         getSelectApoderado();
         getSelectNacionalidad();
         $.each(msg, function (i, o) {
-            fila += '<div class="row" style="padding:20px;"><form id="login2" name="login2"  method="post" action="http://127.0.0.1/Tesis/backEnd/editarAlumno" enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idAlumno + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required type="text" name="id"  value="' + o.idAlumno + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutAlumno + '" placeholder="Rut" class="form-control" autocomplete="off" onfocus="rut2(this.value);" onkeypress="return esRutLogin2(event)"  onkeyup="this.value = this.value.toUpperCase();" onblur="formatoRut2()"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Alumno</label> <input required type="text" value="' + o.nombresAlumno + '" name="nombre2" placeholder="Ingrese nombre del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Alumno</label> <input required type="text" value="' + o.apellidosAlumno + '" name="apellido2" placeholder="Ingrese apellido del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Alumno</label> <input required type="date" value="' + o.fechaNacimientoAlumno + '" name="nacimiento2" placeholder="Ingrese Fecha Nacimiento del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Alumno</label> <input required type="text" name="numero2" value="' + o.numeroAlumno + '" placeholder="Ingrese Numero del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Alumno</label> <input required type="email" value="' + o.correoAlumno + '" name="correo2" placeholder="Ingrese Correo del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Alumno</label> <input required type="text" value="' + o.claveAlumno + '" name="clave2" placeholder="Ingrese Clave del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Alumnos/' + o.fotoAlumno + '"></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nacionalidad: <label><h5>' + o.nombreNacionalidad + '</h5></label></label> <select class="form-control" name="nacionalidad2"  required id="getSelectNacionalidadCurso2"></select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apoderado: <label><h5>' + o.nombreApoderado + '</h5></label></label><select class="form-control" name="apoderado2" required id="getSelectApoderado2"> </select></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"  required name="estado"></select>  </div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" style="background-color: black; color: white; ">Editar Alumno</button></div><input type="text" value="' + o.fotoAlumno + '" name="fotoantigua" class="hidden"></form></div>';
+            fila += '<div class="row" style="padding:20px;"><form id="editAlu" name="login2"  method="post"  enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idAlumno + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required type="text" name="id"  value="' + o.idAlumno + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutAlumno + '" placeholder="Rut" class="form-control" autocomplete="off" oninput="checkRutA(this)"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Alumno</label> <input required type="text" value="' + o.nombresAlumno + '" name="nombre2" placeholder="Ingrese nombre del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Alumno</label> <input required type="text" value="' + o.apellidosAlumno + '" name="apellido2" placeholder="Ingrese apellido del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Alumno</label> <input required type="date" value="' + o.fechaNacimientoAlumno + '" name="nacimiento2" placeholder="Ingrese Fecha Nacimiento del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Alumno</label> <input required type="text" name="numero2" value="' + o.numeroAlumno + '" placeholder="Ingrese Numero del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Alumno</label> <input required type="email" value="' + o.correoAlumno + '" name="correo2" placeholder="Ingrese Correo del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Alumno</label> <input required type="text" value="' + o.claveAlumno + '" name="clave2" placeholder="Ingrese Clave del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Alumnos/' + o.fotoAlumno + '"></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nacionalidad: <label><h5>' + o.nombreNacionalidad + '</h5></label></label> <select class="form-control" name="nacionalidad2"  required id="getSelectNacionalidadCurso2"></select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apoderado: <label><h5>' + o.nombreApoderado + '</h5></label></label><select class="form-control" name="apoderado2" required id="getSelectApoderado2"> </select></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"  required name="estado"></select>  </div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Alumno</button></div><input type="text" value="' + o.fotoAlumno + '" name="fotoantigua" class="hidden"></form></div>';
             $("#info-alumnos").append(fila);
         });
     }
@@ -391,7 +421,7 @@ function getDatosApoderado(id) {
         getSelectEstado();
         getSelectParentesco();
         $.each(msg, function (i, o) {
-            fila += '<div class="row" style="padding:20px;"><form id="login2" name="login2"  method="post" action="http://127.0.0.1/Tesis/backEnd/editarApoderado" enctype="multipart/form-data"> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Apoderado</label> <input required="" disabled="" type="text" value="' + o.idApoderado + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required="" type="text" name="id" value="' + o.idApoderado + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Apoderado</label> <input required type="text" name="username" placeholder="Rut" value="' + o.rutApoderado + '" class="form-control" autocomplete="off" onfocus="rut(this.value);" onkeypress="return esRutLogin(event)" onkeyup="this.value = this.value.toUpperCase();" onblur="formatoRut()"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Apoderado</label> <input required type="text" name="nombre2" value="' + o.nombresApoderado + '"  placeholder="Ingrese nombre del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Apoderado</label> <input required type="text" name="apellido2" value="' + o.apellidosApoderado + '"  placeholder="Ingrese apellido del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Apoderado</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoApoderado + '"  placeholder="Ingrese Fecha Nacimiento del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Apoderado</label> <input required type="text" name="numero2" value="' + o.numeroApoderado + '"  placeholder="Ingrese Numero del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Apoderado</label> <input required type="email" name="correo2" value="' + o.correoApoderado + '"  placeholder="Ingrese Correo del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <input required type="text" name="clave2" value="' + o.claveApoderado + '" placeholder="Ingrese Clave del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Apoderados/' + o.fotoApoderado + '"> </div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Parentesco: <label><h5>' + o.nombreParentesco + '</h5></label></label>     <select class="form-control" name="parentesco2" required="false" id="getSelectParentesco2">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>     <select class="form-control" name="estado2" required="false" id="getSelectEstado">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Apoderado</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" style="background-color: black; color: white; ">Editar Apoderado</button></div><input type="text" value="' + o.fotoApoderado + '" name="fotoantigua" class="hidden"></form></div>';
+            fila += '<div class="row" style="padding:20px;"><form id="editApo" name="login2"  method="post"  enctype="multipart/form-data"> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Apoderado</label> <input required="" disabled="" type="text" value="' + o.idApoderado + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required="" type="text" name="id" value="' + o.idApoderado + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Apoderado</label> <input required type="text" name="username" placeholder="Rut" value="' + o.rutApoderado + '" class="form-control" autocomplete="off" oninput="checkRutA(this)"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Apoderado</label> <input required type="text" name="nombre2" value="' + o.nombresApoderado + '"  placeholder="Ingrese nombre del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Apoderado</label> <input required type="text" name="apellido2" value="' + o.apellidosApoderado + '"  placeholder="Ingrese apellido del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Apoderado</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoApoderado + '"  placeholder="Ingrese Fecha Nacimiento del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Apoderado</label> <input required type="text" name="numero2" value="' + o.numeroApoderado + '"  placeholder="Ingrese Numero del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Apoderado</label> <input required type="email" name="correo2" value="' + o.correoApoderado + '"  placeholder="Ingrese Correo del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <input required type="text" name="clave2" value="' + o.claveApoderado + '" placeholder="Ingrese Clave del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Apoderados/' + o.fotoApoderado + '"> </div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Parentesco: <label><h5>' + o.nombreParentesco + '</h5></label></label>     <select class="form-control" name="parentesco2" required="false" id="getSelectParentesco2">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>     <select class="form-control" name="estado2" required="false" id="getSelectEstado">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Apoderado</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Apoderado</button></div><input type="text" value="' + o.fotoApoderado + '" name="fotoantigua" class="hidden"></form></div>';
             $("#info-apoderados").append(fila);
         });
     }
@@ -413,7 +443,7 @@ function editarCurso(id, estado) {
             data: { "id": id, "estado": estado }
         }).then(function (msg) {
             if (msg.msg == "ok") {
-                toastr.success("Participante Curso", "Estado Cambiado!!!")
+                toastr.success("Curso Editado", "Estado Cambiado!!!")
 
                 $("#categoria").val("");
             } else {
@@ -1045,3 +1075,96 @@ function largo(evt) {
 }
 
 
+
+function carpetaMaestra() {
+    $.ajax({
+        url: 'CarpetasProfesor',
+        type: 'POST',
+        dataType: 'json',
+
+    }).then(function (msg) {
+        $("#carpeta_maestra").empty();
+        $.each(msg, function (i, o) {
+            var total = '<div id="jstree1" class="jstree jstree-1 jstree-default" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j1_1" aria-busy="false">    <ul class="jstree-container-ul jstree-children" role="group">        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j1_1_anchor" aria-expanded="true" id="j1_1" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" value="1" id="pruebaid" tabindex="-1" id="j1_1_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>' + o.nombreCarpeta_Profesor + '        <button class="btn btn-info btn-circle" type="button"id="boton" value="' + o.idCarpeta_Profesor + '" type="button"><i class="fa fa-eye"></i>           </button>    </a>           <ul role="group" class="jstree-children" id="cursos">            </ul>        </li>    </ul></div>';
+            $("#carpeta_maestra").append(total);
+        });
+    });
+}
+
+function carpetaCursosProfesor(id) {
+    $.ajax({
+        url: 'CarpetaCursosProfesor',
+        type: 'POST',
+        dataType: 'json',
+        data: { "id": id }
+    }).then(function (msg) {
+        if (msg.msg == "No tiene ningun curso asignado, Comunicarse con su Administrador") {
+            toastr.error("", msg.msg)
+        } else {
+            $("#cursos").empty();
+            $.each(msg, function (i, o) {
+                var total = '<li role="treeitem" style="margin-bottom:15px;" aria-selected="false" aria-level="2" aria-labelledby="j1_2_anchor" aria-expanded="false" id="j' + o.idCarpeta_CursoProfesor + '" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_2_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>' + o.nombreCarpeta_CursoProfesor + '&nbsp&nbsp<button class="btn btn-info btn-circle" type="button"id="verArchivosCarpeta" value="' + o.idCarpeta_CursoProfesor + '" type="button"><i class="fa fa-eye"></i>           </button>&nbsp<button class="btn btn-success btn-circle btn-xs" id="botoncurso" data-toggle="modal" data-target="#myModal" value="' + o.idCarpeta_CursoProfesor + ',' + o.rutaCarpeta_CursoProfesor + '" type="button"><i class="fa fa-upload"></i></button></a><ul role="group" class="jstree-children" id="archivos' + o.idCarpeta_CursoProfesor + '"></ul> </li>';
+                $("#cursos").append(total);
+            });
+        }
+    });
+}
+
+function verArchivosCurso(id) {
+    $.ajax({
+        url: 'verArchivosXCurso',
+        type: 'POST',
+        dataType: 'json',
+        data: { "id": id }
+    }).then(function (msg) {
+        var lugar = "#archivos" + id;
+        $(lugar).empty();
+        $.each(msg, function (i, o) {
+            var total = '<li role="treeitem" style="margin-top:15px;" aria-selected="false" aria-level="3" aria-labelledby="j1_3_anchor" aria-expanded="false" id="j1_3" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_3_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i><strong>Materia:</strong> ' + o.nombreMateria + ' | <strong>Descripción:</strong> ' + o.descripcionArchivo + ' | <strong>Archivo:</strong> ' + o.nombreArchivo + ' &nbsp&nbsp<a class="btn btn-success btn-circle btn-xs" href="' + o.rutaArchivo + '" target="_blank"  rel="noopener noreferrer"  ><i class="fa fa-download"></i></a></a></li>';
+            $(lugar).append(total);
+        });
+    });
+}
+
+function getSelectMateriasCurso(id) {
+    $.ajax({
+        url: 'getMateriaCurso',
+        type: 'POST',
+        dataType: 'json',
+        data: { "idCurso": id }
+    }).then(function (msg) {
+        $("#getSelectMaterias").empty();
+        var fila = "<option disabled selected>Seleccione la Materia</option>";
+        $.each(msg.arreglo, function (i, o) {
+            fila += "<option value='" + o.idMateria + "'>" + o.nombreMateria + "</option>";
+        });
+        $("#getSelectMaterias").append(fila);
+        $("#curso").val(msg.curso);
+
+    });
+}
+
+
+function editarMateria(id, estado) {
+    var id = id;
+    var estado = estado;
+    if (id == "" || estado == "") {
+        toastr.error("Verifique todos los campos", "Ingrese todos los datos!!!")
+    } else {
+        $.ajax({
+            url: 'editarMateria',
+            type: 'POST',
+            dataType: 'json',
+            data: { "id": id, "estado": estado }
+        }).then(function (msg) {
+            if (msg.msg == "ok") {
+                toastr.success("Materia editada", "Estado Cambiado!!!")
+
+                $("#categoria").val("");
+            } else {
+                toastr.error("", "Error el editar la Materia!!!")
+                toastr.options = { "closeButton": true, "debug": false, "progressBar": true, "preventDuplicates": false, "positionClass": "toast-top-right", "onclick": null, "showDuration": "400", "hideDuration": "1000", "timeOut": "4000", "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "swing", "showMethod": "show", "hideMethod": "fadeOut" }
+            }
+        });
+    }
+}
