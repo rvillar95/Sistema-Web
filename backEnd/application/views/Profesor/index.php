@@ -79,6 +79,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title" style="background-color: #0d8ddb;">
+                                    <h5 style="color: white">Notificaciones</h5> 
+                                </div>
+                                <div class="ibox-content" style="padding: 0px;">
+                                    <a href=" <?php echo base_url(); ?>NotificacionPush">
+                                        <center>
+                                            <div class="div-img sty" >
+                                                <img src="<?php echo base_url() ?>lib/img/logo.png"  class="img-responsive img" alt=""/>
+                                            </div>
+                                        </center>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="footer">

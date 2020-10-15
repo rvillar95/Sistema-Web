@@ -97,6 +97,8 @@ $route['subirArchivo'] = 'Profesor/subirArchivo';
 $route['getMateriaCurso'] = 'Profesor/getMateriasProfesor';
 $route['verArchivosXCurso'] = 'Profesor/verArchivosXCurso';
 
+$route['NotificacionPush'] = 'Profesor/notificacion';
+$route['getNotificaciones'] = 'Profesor/getNotificaciones';
 
 
 

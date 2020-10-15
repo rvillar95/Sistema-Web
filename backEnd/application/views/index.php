@@ -35,6 +35,7 @@
                         <div class="form-group">
                             <input type="password" class="form-control" id="clave" placeholder="Clave">
                         </div>
+                        <?php echo gethostname();?>
                         <button type="submit" id="btnAgregarUsuario" style="background-color: black; color: white;" class="btn block full-width m-b">Entrar</button>
                     </form>
                     <strong style="color: white">Copyright</strong> <a href="https://solucionesvillar.cl" style="color: whitesmoke">Soluciones Villar &copy; 2018-2019</a>  

@@ -202,13 +202,16 @@
                 $("body").on("click", "#boton", function(e) {
                     e.preventDefault();
                     var id = $(this).val();
-                    if (!$("#j1_1").hasClass("jstree-closed") && $("#j1_1").hasClass("jstree-open")) {
-                        $("j1_1").addClass("jstree-closed");
-                        $('#j1_1').removeClass('jstree-open');
-                        $("#cursos").empty();
+                    console.log(id);
+                    var variable = "#j_"+id;
+                    var variableCursos = "#cursos"+id;
+                    if (!$(variable).hasClass("jstree-closed") && $(variable).hasClass("jstree-open")) {
+                        $(variable).addClass("jstree-closed");
+                        $(variable).removeClass('jstree-open');
+                        $(variableCursos).empty();
                     } else {
-                        $('#j1_1').addClass('jstree-open');
-                        $('#j1_1').removeClass('jstree-closed');
+                        $(variable).addClass('jstree-open');
+                        $(variable).removeClass('jstree-closed');
                         carpetaCursosProfesor(id);
                     }
 
@@ -221,6 +224,7 @@
                     var id = $(this).val();
                     var palabra = "#archivos" + id;
                     var li = "#j" + id;
+
                     if (!$(li).hasClass("jstree-closed") && $(li).hasClass("jstree-open")) {
 
                         $(li).addClass("jstree-closed");

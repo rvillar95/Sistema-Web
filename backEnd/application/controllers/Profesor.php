@@ -25,6 +25,14 @@ class Profesor extends CI_Controller
         }
     }
 
+    public function notificacion(){
+        if (count($this->session->userdata("profesor")) > 0) {
+            $this->load->view("Profesor/notificacion");
+        } else {
+            $this->load->view("Errormsg");
+        }
+    }
+
     public function material()
     {
         if (count($this->session->userdata("profesor")) > 0) {
@@ -137,7 +145,14 @@ class Profesor extends CI_Controller
         }
     }
 
-
+    public function getNotificaciones(){
+        if (count($this->session->userdata("profesor")) > 0) {
+            $idProfesor = $this->input->post("idProfesor");
+            echo json_encode($this->modeloProfesor->getNotificaciones($idProfesor));
+        } else {
+            $this->load->view('Errormsg');
+        }
+    }
 
     public function cerrarSesion()
     {

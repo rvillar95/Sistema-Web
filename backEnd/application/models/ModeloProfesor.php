@@ -83,7 +83,19 @@ class ModeloProfesor extends CI_Model
         $this->db->select("a.nombreArchivo,a.descripcionArchivo,a.rutaArchivo,x.nombreMateria");
         $this->db->from("archivo a");
         $this->db->join("materia x", "x.idMateria = a.materiaArchivo");
-        $this->db->where("idcarpetaCurso", $idCarpetaCurso);
+        $this->db->where("a.idcarpetaCurso", $idCarpetaCurso);
         return $this->db->get()->result();
+    }
+
+    function getNotificaciones($idProfesor){
+        $this->db->select("count(*) as 'numero'");
+        $this->db->from("detalle_mensaje m");
+        $this->db->join("mensaje j", "j.idMensaje = m.mensaje_idMensaje");
+        $this->db->join("curso_profesor p", "p.idCurso_Profesor = j.curso_profesor_idCurso_Profesor");
+        $this->db->join("profesor s", "s.idProfesor = p.profesor_idProfesor");
+        $this->db->where("m.fechaVistoDetalle_Mensaje", "procesando");
+        $this->db->where("s.idProfesor", $idProfesor);
+        $var = $this->db->get()->result();
+        return $var[0]->numero;
     }
 }

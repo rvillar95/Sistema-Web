@@ -131,7 +131,8 @@ class Administrador extends CI_Controller
         }
     }
 
-    public function Busquedas(){
+    public function Busquedas()
+    {
         if (count($this->session->userdata("administrador")) > 0) {
             $this->load->view("Administrador/Busquedas");
         } else {
@@ -300,7 +301,8 @@ class Administrador extends CI_Controller
             $institucion = $user[0]->institucionAdministrador;
             $this->modeloAdministrador->addTaller($nombre, $inicio, $termino, $anno, $profesor, $institucion);
             echo json_encode(array("msg" => "ok"));
-        } else { }
+        } else {
+        }
     }
 
     public function editarTaller()
@@ -313,7 +315,8 @@ class Administrador extends CI_Controller
             $anno = $this->input->post("anno_t");
             $profesor = $this->input->post("profesor_t");
             $this->modeloAdministrador->editarTaller($id, $nombre, $inicio, $termino, $anno, $profesor);
-        } else { }
+        } else {
+        }
     }
 
     public function eliminarTaller()
@@ -321,7 +324,8 @@ class Administrador extends CI_Controller
         if (count($this->session->userdata("administrador")) > 0) {
             $id = $this->input->post("id_t");
             $this->modeloAdministrador->eliminarTaller($id);
-        } else { }
+        } else {
+        }
     }
 
     public function getTablaTaller()
@@ -354,14 +358,16 @@ class Administrador extends CI_Controller
             );
             echo json_encode($output);
             exit();
-        } else { }
+        } else {
+        }
     }
 
     public function getTaller2()
     {
         if (count($this->session->userdata("administrador")) > 0) {
             echo json_encode($this->modeloAdministrador->getTaller());
-        } else { }
+        } else {
+        }
     }
 
     //----------------------FIN----------------------------------CRUD TALLER
@@ -693,7 +699,7 @@ class Administrador extends CI_Controller
     {
         if (count($this->session->userdata("administrador")) > 0) {
             date_default_timezone_set("Chile/Continental");
-            $hora = date('YmdHis');
+            $hora = date('d:m:Y H:i:s');
             $nombre_imagen = $_FILES['foto']['name'];
             $tipo_imagen = $_FILES['foto']['type'];
             $tamano_imagen = $_FILES['foto']['size'];
@@ -1627,10 +1633,13 @@ class Administrador extends CI_Controller
     public function insertarExcelApoderado()
     {
         if (isset($_FILES["file"]["name"])) {
+            $contador = 0;
             $path = $_FILES["file"]["tmp_name"];
             $object = PHPExcel_IOFactory::load($path);
             $user = $this->session->userdata("administrador");
             $idAntes = $this->modeloAdministrador->ultimoId();
+            $institucion = $user[0]->institucionAdministrador;
+            
             foreach ($object->getWorksheetIterator() as $worksheet) {
                 $highestRow = $worksheet->getHighestRow();
                 $highestColumn = $worksheet->getHighestColumn();
@@ -1680,7 +1689,9 @@ class Administrador extends CI_Controller
                         $numeroAlumno = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
                         $correoAlumno = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
                         $nacionalidadAlumno = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                        $curso = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
                         $claveAlumno = substr("$numeroAlumno", -4);
+
                         $data2[] = array(
                             'rutAlumno'        =>    strip_tags($rutAlumno),
                             'nombresAlumno'            =>    strip_tags($nombresAlumno),
@@ -1696,9 +1707,13 @@ class Administrador extends CI_Controller
                             'estadoAlumno' => 1,
                             'fotoAlumno' => 'sinfoto.png'
                         );
+
+                        $contador++;
                     }
                 };
             } else {
+                $idAntes++;
+
                 foreach ($object->getWorksheetIterator() as $worksheet) {
                     $highestRow = $worksheet->getHighestRow();
                     $highestColumn = $worksheet->getHighestColumn();
@@ -1711,7 +1726,9 @@ class Administrador extends CI_Controller
                         $numeroAlumno = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
                         $correoAlumno = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
                         $nacionalidadAlumno = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                        $curso = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
                         $claveAlumno = substr("$numeroAlumno", -4);
+                        
                         $data2[] = array(
                             'rutAlumno'        =>    strip_tags($rutAlumno),
                             'nombresAlumno'            =>    strip_tags($nombresAlumno),
@@ -1727,10 +1744,11 @@ class Administrador extends CI_Controller
                             'estadoAlumno' => 1,
                             'fotoAlumno' => 'sinfoto.png'
                         );
+                        $contador++;
                     }
                 };
             }
-            $this->modeloAdministrador->insertarExcelAlumno($data2);
+            $this->modeloAdministrador->insertarExcelAlumno($data2, $contador,$curso,$institucion);
             echo "Importacion Realizada con Exito";
         }
     }
@@ -1829,7 +1847,8 @@ class Administrador extends CI_Controller
             $institucion = $user[0]->institucionAdministrador; //obtener la clave foreana de INSTITUCIOn de la session "ADMINISTRADOR" 
             $this->modeloAdministrador->addCurso($nombre, $grado, $letra, $anno, $institucion);
             echo json_encode(array("msg" => "ok"));
-        } else { }
+        } else {
+        }
     }
     public function editarMateria()
     {

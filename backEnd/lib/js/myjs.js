@@ -10,7 +10,7 @@
             type: 'POST',
             dataType: 'json',
             data: { "rut": rut, "clave": clave }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "error") {
                 toastr.error("Verifique su Rut y Clave.", "Datos Incorrectos!!!");
             } else if (msg.msg == "administrador") {
@@ -36,7 +36,7 @@ function IniciarSesionProfesor() {
             type: 'POST',
             dataType: 'json',
             data: { "rut": rut, "clave": clave }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "error") {
                 toastr.error("Verifique su Rut y Clave.", "Datos Incorrectos!!!");
             } else if (msg.msg == "administrador") {
@@ -54,8 +54,11 @@ function IniciarSesionProfesor() {
 
 function salir() {
     $.ajax({
-        url: 'cerrarSesion', type: 'POST', dataType: 'json', data: {}
-    }).then(function (msg) {
+        url: 'cerrarSesion',
+        type: 'POST',
+        dataType: 'json',
+        data: {}
+    }).then(function(msg) {
 
     });
     window.location.href = 'http://127.0.0.1/Tesis/backEnd/';
@@ -73,7 +76,7 @@ function agregarLetraCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "letra": letra }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Letra agregada.", "Acción Realizada");
                 $("#letra").val("");
@@ -95,7 +98,7 @@ function AgregarAnnoCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "anno": anno }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Año agregado.", "Acción Realizada");
                 $("#curso").val("");
@@ -110,8 +113,8 @@ function getAnnoEscolar() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getSelectAnnoEscolar';
     $("#getAnnoEscolar").empty();
     var fila = "<option disabled selected>Seleccione el Año Escolar</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idAnno_Escolar + "'>" + o.nombreAnno_Escolar + "</option>";
         });
         $("#getAnnoEscolar").append(fila);
@@ -122,8 +125,8 @@ function getAnnoEscolar2() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getSelectAnnoEscolar';
     $("#getAnnoEscolar2").empty();
     var fila = "<option disabled selected>Seleccione el Año Escolar</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idAnno_Escolar + "'>" + o.nombreAnno_Escolar + "</option>";
         });
         $("#getAnnoEscolar2").append(fila);
@@ -135,8 +138,8 @@ function getLetraCurso() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getLetraCurso';
     $("#getLetraCurso").empty();
     var fila = "<option disabled selected>Seleccione la Letra del Curso</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idLetra_Curso + "'>" + o.nombreLetra_Curso + "</option>";
         });
         $("#getLetraCurso").append(fila);
@@ -147,8 +150,8 @@ function getLetraCurso2() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getLetraCurso';
     $("#getLetraCurso2").empty();
     var fila = "<option disabled selected>Seleccione la Letra del Curso</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idLetra_Curso + "'>" + o.nombreLetra_Curso + "</option>";
         });
         $("#getLetraCurso2").append(fila);
@@ -168,7 +171,7 @@ function agregarCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "nombre": nombre, "grado": grado, "letra": letra, "anno": anno }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Curso agregado.", "Acción Realizada");
                 $("#nombre").val("");
@@ -190,7 +193,7 @@ function agregarNacionalidad() {
             type: 'POST',
             dataType: 'json',
             data: { "nacionalidad": nacionalidad }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Nacionalidad agregada.", "Acción Realizada");
                 $("#nacionalidad").val("");
@@ -212,7 +215,7 @@ function agregarParentesco() {
             type: 'POST',
             dataType: 'json',
             data: { "parentesco": parentesco }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Parentesco agregado.", "Acción Realizada");
                 $("#parentesco").val("");
@@ -228,8 +231,8 @@ function getSelectProfesor() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getSelectProfesor';
     $("#getSelectProfesor").empty();
     var fila = "<option disabled selected>Seleccione el Profesor</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idProfesor + "'>" + o.nombreProfesor + "</option>";
         });
         $("#getSelectProfesor").append(fila);
@@ -250,7 +253,7 @@ function agregarTaller() {
             type: 'POST',
             dataType: 'json',
             data: { "nombreTaller": nombre, "inicioTaller": inicio, "finTaller": fin, "annoTaller": anno, "profesorTaller": profe }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Taller agregado.", "Acción Realizada");
                 $("#nombre").val("");
@@ -269,8 +272,8 @@ function getDatosInstitucion() {
     var hola = 'http://127.0.0.1/Tesis/backEnd/getInstitucion';
     $("#info-institucion").empty();
     var fila = "";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += '<form  id="prueba" method="post"  enctype="multipart/form-data" ><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>ID Institución</label><input disabled required  placeholder="ID de la Institución" value="' + o.idInstitucion + '" type="text" name="nombre" class="form-control" ></div> <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Nombre Institución</label><input required id="nombre" value="' + o.nombreInstitucion + '" placeholder="Nombre de la Institucion" type="text" name="nombre" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Descripción Institución</label><input required id="descripcion" value="' + o.descripcionInstitucion + '" placeholder="Descripcion de la Institución" type="text" name="descripcion" class="form-control" ></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Ciudad Institución</label><input required id="ciudad" value="' + o.ciudadInstitucion + '" placeholder="Ciudad de la Institución" type="text" name="ciudad" class="form-control" ></div>  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion</label><br/><img style="width:50px; height=50px;" src="http://127.0.0.1/Tesis/backEnd/lib/img/Institucion/' + o.logoInstitucion + '""></div><div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><label>Logo Institucion Nuevo</label> <input type="file" name="foto" placeholder="Seleccione el archivo" class="form-control"></div> <div class="form-group form-group col-lg-6 col-md-6 col-sm-6 col-xs-6"><button type="submit" id="btn2"  class="btn btn-primary" style="background-color: black; color: white; ">Editar Datos</button></div><input type="text" name="fotoantigua" value="' + o.logoInstitucion + '" class="hidden"></form> ';
         });
         $("#info-institucion").append(fila);
@@ -311,8 +314,8 @@ function getSelectNacionalidad() {
     $("#getSelectNacionalidadCurso").empty();
     $("#getSelectNacionalidadCurso2").empty();
     var fila = "<option disabled selected>Seleccione la Nacionalidad</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idNacionalidad + "'>" + o.nombreNacionalidad + "</option>";
         });
         $("#getSelectNacionalidadCurso").append(fila);
@@ -325,8 +328,8 @@ function getSelectApoderado() {
     $("#getSelectApoderado").empty();
     $("#getSelectApoderado2").empty();
     var fila = "<option disabled selected>Seleccione el Apoderado</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idApoderado + "'>" + o.nombreApoderado + "</option>";
         });
         $("#getSelectApoderado").append(fila);
@@ -339,8 +342,8 @@ function getSelectParentesco() {
     $("#getSelectParentesco").empty();
     $("#getSelectParentesco2").empty();
     var fila = "<option disabled selected>Seleccione el Parentesco</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idParentesco + "'>" + o.nombreParentesco + "</option>";
         });
         $("#getSelectParentesco").append(fila);
@@ -353,8 +356,8 @@ function getSelectEstado() {
     $("#getSelectEstado").empty();
 
     var fila = "<option disabled selected>Seleccione el Estado</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idEstado + "'>" + o.nombreEstado + "</option>";
         });
         $("#getSelectEstado").append(fila);
@@ -371,17 +374,17 @@ function getDatosProfesor(id) {
         type: 'POST',
         dataType: 'json',
         data: { "id": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         $("#info-profesores").empty();
         var fila = "";
-        
-        $.each(msg, function (i, o) {
+
+        $.each(msg, function(i, o) {
             fila += '<div class="row" style="padding:20px;"><form id="editPro" name="login2"  enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idProfesor + '" placeholder="Ingrese ID del Profesor" class="form-control"> <input required type="text" name="id"  value="' + o.idProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutProfesor + '" placeholder="Rut" class="form-control" autocomplete="off" oninput="checkRutA(this)" ></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Profesor</label> <input required type="text" name="nombre2" value="' + o.nombresProfesor + '" placeholder="Ingrese nombre del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Profesor</label> <input required type="text" name="apellido2" value="' + o.apellidosProfesor + '" placeholder="Ingrese apellido del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Profesor</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoProfesor + '" placeholder="Ingrese Fecha Nacimiento del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Profesor</label> <input required type="text" name="numero2" value="' + o.numeroProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Profesor</label> <input required type="text" name="clave2" value="' + o.claveProfesor + '" placeholder="Ingrese Numero del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Profesor</label> <input required type="email" name="correo2" value="' + o.correoProfesor + '" placeholder="Ingrese Correo del Profesor" class="form-control"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Profesores/' + o.fotoProfesor + '"></div>                                                                                              <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Profesor</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>    <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"   required name="estado"></select>  </div>                                        <div class="form-group form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Profesor</button></div><input type="text" value="' + o.fotoProfesor + '" name="fotoantigua" class="hidden"></form></div>';
             getSelectEstado();
             $("#getSelectEstado > option[value='" + o.estadoProfesor + "']").attr("selected", true);
             $("#info-profesores").append(fila);
             $('#getSelectEstado > option[value="3"]').attr('selected', 'selected');
-            
+
 
         });
     });
@@ -394,18 +397,17 @@ function getDatosAlumno(id) {
         type: 'POST',
         dataType: 'json',
         data: { "id": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         $("#info-alumnos").empty();
         var fila = "";
         getSelectEstado();
         getSelectApoderado();
         getSelectNacionalidad();
-        $.each(msg, function (i, o) {
+        $.each(msg, function(i, o) {
             fila += '<div class="row" style="padding:20px;"><form id="editAlu" name="login2"  method="post"  enctype="multipart/form-data"><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Profesor</label> <input required disabled type="text" value="' + o.idAlumno + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required type="text" name="id"  value="' + o.idAlumno + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Profesor</label> <input required type="text" name="username" value="' + o.rutAlumno + '" placeholder="Rut" class="form-control" autocomplete="off" oninput="checkRutA(this)"></div>                                                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Alumno</label> <input required type="text" value="' + o.nombresAlumno + '" name="nombre2" placeholder="Ingrese nombre del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Alumno</label> <input required type="text" value="' + o.apellidosAlumno + '" name="apellido2" placeholder="Ingrese apellido del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Alumno</label> <input required type="date" value="' + o.fechaNacimientoAlumno + '" name="nacimiento2" placeholder="Ingrese Fecha Nacimiento del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Alumno</label> <input required type="text" name="numero2" value="' + o.numeroAlumno + '" placeholder="Ingrese Numero del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Alumno</label> <input required type="email" value="' + o.correoAlumno + '" name="correo2" placeholder="Ingrese Correo del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Alumno</label> <input required type="text" value="' + o.claveAlumno + '" name="clave2" placeholder="Ingrese Clave del Alumno" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Alumnos/' + o.fotoAlumno + '"></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nacionalidad: <label><h5>' + o.nombreNacionalidad + '</h5></label></label> <select class="form-control" name="nacionalidad2"  required id="getSelectNacionalidadCurso2"></select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apoderado: <label><h5>' + o.nombreApoderado + '</h5></label></label><select class="form-control" name="apoderado2" required id="getSelectApoderado2"> </select></div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>  <select class="form-control" id="getSelectEstado"  required name="estado"></select>  </div> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Alumno</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div>  <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Alumno</button></div><input type="text" value="' + o.fotoAlumno + '" name="fotoantigua" class="hidden"></form></div>';
             $("#info-alumnos").append(fila);
         });
-    }
-    );
+    });
 }
 
 function getDatosApoderado(id) {
@@ -415,17 +417,16 @@ function getDatosApoderado(id) {
         type: 'POST',
         dataType: 'json',
         data: { "id": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         $("#info-apoderados").empty();
         var fila = "";
         getSelectEstado();
         getSelectParentesco();
-        $.each(msg, function (i, o) {
+        $.each(msg, function(i, o) {
             fila += '<div class="row" style="padding:20px;"><form id="editApo" name="login2"  method="post"  enctype="multipart/form-data"> <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>ID Apoderado</label> <input required="" disabled="" type="text" value="' + o.idApoderado + '" placeholder="Ingrese ID del Alumno" class="form-control"> <input required="" type="text" name="id" value="' + o.idApoderado + '" placeholder="Ingrese nombre del Alumno" class="form-control hidden"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Rut Apoderado</label> <input required type="text" name="username" placeholder="Rut" value="' + o.rutApoderado + '" class="form-control" autocomplete="off" oninput="checkRutA(this)"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Nombres Apoderado</label> <input required type="text" name="nombre2" value="' + o.nombresApoderado + '"  placeholder="Ingrese nombre del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Apellidos Apoderado</label> <input required type="text" name="apellido2" value="' + o.apellidosApoderado + '"  placeholder="Ingrese apellido del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Fecha Nacimiento Apoderado</label> <input required type="date" name="nacimiento2" value="' + o.fechaNacimientoApoderado + '"  placeholder="Ingrese Fecha Nacimiento del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Número Apoderado</label> <input required type="text" name="numero2" value="' + o.numeroApoderado + '"  placeholder="Ingrese Numero del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Correo Apoderado</label> <input required type="email" name="correo2" value="' + o.correoApoderado + '"  placeholder="Ingrese Correo del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <input required type="text" name="clave2" value="' + o.claveApoderado + '" placeholder="Ingrese Clave del Apoderado" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Clave Apoderado</label> <img style="width: 100px; height: 100px" src="http://127.0.0.1/Tesis/backEnd/lib/img/Apoderados/' + o.fotoApoderado + '"> </div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Parentesco: <label><h5>' + o.nombreParentesco + '</h5></label></label>     <select class="form-control" name="parentesco2" required="false" id="getSelectParentesco2">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Estado: <label><h5>' + o.nombreEstado + '</h5></label></label>     <select class="form-control" name="estado2" required="false" id="getSelectEstado">    </select></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><label>Foto Apoderado</label> <input  type="file" name="foto2" placeholder="Seleccione el archivo" class="form-control"></div><div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12"><button type="submit" class="btn btn-primary" id="btn2" style="background-color: black; color: white; ">Editar Apoderado</button></div><input type="text" value="' + o.fotoApoderado + '" name="fotoantigua" class="hidden"></form></div>';
             $("#info-apoderados").append(fila);
         });
-    }
-    );
+    });
 
 
 }
@@ -441,7 +442,7 @@ function editarCurso(id, estado) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id, "estado": estado }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Curso Editado", "Estado Cambiado!!!")
 
@@ -459,8 +460,8 @@ function getSelectCurso() {
     $("#getSelectCurso").empty();
 
     var fila = "<option disabled selected>Seleccione el Curso</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idCurso + "'>" + o.nombreCurso + "</option>";
         });
         $("#getSelectCurso").append(fila);
@@ -479,7 +480,7 @@ function addRelacionProfesorCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "profesor": profesor, "curso": curso }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Relacion agregada.", "Acción Realizada");
             } else if (msg.msg == "medio") {
@@ -501,9 +502,9 @@ function getTablaProfesoresCurso(id) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id }
-        }).then(function (msg) {
+        }).then(function(msg) {
             $("#tbodyDetalle").empty();
-            $.each(msg, function (i, o) {
+            $.each(msg, function(i, o) {
                 var fila = "<tr><td>" + o.idProfesor + "</td>";
                 fila += "<td >" + o.rutProfesor + "</td>";
                 fila += "<td >" + o.nombreProfesor + "</td>";
@@ -526,9 +527,9 @@ function getTablaAlumnosCurso(id) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id }
-        }).then(function (msg) {
+        }).then(function(msg) {
             $("#tbodyDetalle").empty();
-            $.each(msg, function (i, o) {
+            $.each(msg, function(i, o) {
                 var fila = "<tr><td>" + o.idAlumno + "</td>";
                 fila += "<td >" + o.rutAlumno + "</td>";
                 fila += "<td >" + o.nombreAlumno + "</td>";
@@ -551,9 +552,9 @@ function getTablaMateriasCurso(id) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id }
-        }).then(function (msg) {
+        }).then(function(msg) {
             $("#tbodyDetalle").empty();
-            $.each(msg, function (i, o) {
+            $.each(msg, function(i, o) {
                 var fila = "<tr><td>" + o.idMateria + "</td>";
                 fila += "<td >" + o.nombreMateria + "</td>";
                 fila += "<td >" + o.descripcionMateria + "</td></tr>";
@@ -573,9 +574,9 @@ function getTablaAlumnosTaller(id) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id }
-        }).then(function (msg) {
+        }).then(function(msg) {
             $("#tbodyDetalle").empty();
-            $.each(msg, function (i, o) {
+            $.each(msg, function(i, o) {
                 var fila = "<tr><td>" + o.idAlumno + "</td>";
                 fila += "<td >" + o.rutAlumno + "</td>";
                 fila += "<td >" + o.nombreAlumno + "</td>";
@@ -594,8 +595,8 @@ function getSelectAlumnos() {
     $("#getSelectAlumnos").empty();
 
     var fila = "<option disabled selected>Seleccione el/los Alumnos</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idAlumno + "'>" + o.nombreAlumno + "</option>";
         });
         $("#getSelectAlumnos").append(fila);
@@ -615,7 +616,7 @@ function addRelacionAlumnoCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "alumnos": alumnos, "curso": curso }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Relacion agregada.", "Acción Realizada");
             } else if (msg.msg == "medio") {
@@ -638,7 +639,7 @@ function addRelacionAlumnoTaller() {
             type: 'POST',
             dataType: 'json',
             data: { "alumnos": alumnos, "taller": taller }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Relacion agregada.", "Acción Realizada");
             } else if (msg.msg == "medio") {
@@ -655,8 +656,8 @@ function getSelectMaterias() {
     $("#getSelectMaterias").empty();
 
     var fila = "<option disabled selected>Seleccione la/las Materias</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idMateria + "'>" + o.nombreMateria + "</option>";
         });
         $("#getSelectMaterias").append(fila);
@@ -669,8 +670,8 @@ function getSelectTaller() {
     $("#getSelectTaller").empty();
 
     var fila = "<option disabled selected>Seleccione el Taller</option>";
-    $.getJSON(hola, function (result) {
-        $.each(result, function (i, o) {
+    $.getJSON(hola, function(result) {
+        $.each(result, function(i, o) {
             fila += "<option value='" + o.idTaller + "'>" + o.nombreTaller + "</option>";
         });
         $("#getSelectTaller").append(fila);
@@ -689,7 +690,7 @@ function addRelacionMateriaCurso() {
             type: 'POST',
             dataType: 'json',
             data: { "materias": materia, "curso": curso }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Relacion agregada.", "Acción Realizada");
             } else if (msg.msg == "medio") {
@@ -714,7 +715,7 @@ function editarApoderado(id, estado) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id, "estado": estado }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Participante Editado", "Estado Cambiado!!!")
 
@@ -737,7 +738,7 @@ function checkRut(rut) {
         type: 'POST',
         dataType: 'json',
         data: { "rut": rutUsuario }
-    }).then(function (msg) {
+    }).then(function(msg) {
         var resultado;
         for (var key in msg.msg) {
             var obj = msg.msg[key];
@@ -860,7 +861,7 @@ function EditarUsuario() {
             type: 'POST',
             dataType: 'json',
             data: { "id": id, "rutUsuario": rutUsuario, "nombreUsuario": nombreUsuario, "apellidoUsuario": apellidoUsuario, "fechaNacimiento": fechaNacimiento, "correoUsuario": correoUsuario, "clave": clave, "ocupacion": ocupacion, "estado": estado }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 $.notify({
                     icon: "../lib/img/tick2.png",
@@ -903,7 +904,7 @@ function RegistrarClase() {
             type: 'POST',
             dataType: 'json',
             data: { "nombreClase": nombreClase, "asistentes": asistentes, "dia": dia, "hora": hora, "salon": salon, "profesor": profesor }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 $.notify({
                     icon: "../lib/img/tick2.png",
@@ -1082,10 +1083,10 @@ function carpetaMaestra() {
         type: 'POST',
         dataType: 'json',
 
-    }).then(function (msg) {
+    }).then(function(msg) {
         $("#carpeta_maestra").empty();
-        $.each(msg, function (i, o) {
-            var total = '<div id="jstree1" class="jstree jstree-1 jstree-default" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j1_1" aria-busy="false">    <ul class="jstree-container-ul jstree-children" role="group">        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j1_1_anchor" aria-expanded="true" id="j1_1" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" value="1" id="pruebaid" tabindex="-1" id="j1_1_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>' + o.nombreCarpeta_Profesor + '        <button class="btn btn-info btn-circle" type="button"id="boton" value="' + o.idCarpeta_Profesor + '" type="button"><i class="fa fa-eye"></i>           </button>    </a>           <ul role="group" class="jstree-children" id="cursos">            </ul>        </li>    </ul></div>';
+        $.each(msg, function(i, o) {
+            var total = '<div id="jstree1" class="jstree jstree-1 jstree-default" role="tree" style="margin-bottom: 20px;" aria-multiselectable="true" tabindex="0" aria-activedescendant="j_' + o.idCarpeta_Profesor + '" aria-busy="false">    <ul class="jstree-container-ul jstree-children" role="group">        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="j1_1_anchor" aria-expanded="true" id="j_' + o.idCarpeta_Profesor + '" class="jstree-node  jstree-closed jstree-last"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" value="1" id="pruebaid" tabindex="-1" id="j1_1_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>' + o.nombreCarpeta_Profesor + '        <button class="btn btn-info btn-circle" type="button"id="boton" value="' + o.idCarpeta_Profesor + '" type="button"><i class="fa fa-eye"></i>           </button>    </a>           <ul role="group" class="jstree-children" id="cursos' + o.idCarpeta_Profesor + '">            </ul>        </li>    </ul></div>';
             $("#carpeta_maestra").append(total);
         });
     });
@@ -1097,14 +1098,15 @@ function carpetaCursosProfesor(id) {
         type: 'POST',
         dataType: 'json',
         data: { "id": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         if (msg.msg == "No tiene ningun curso asignado, Comunicarse con su Administrador") {
             toastr.error("", msg.msg)
         } else {
-            $("#cursos").empty();
-            $.each(msg, function (i, o) {
+            var variable = "#cursos" + id;
+            $(variable).empty();
+            $.each(msg, function(i, o) {
                 var total = '<li role="treeitem" style="margin-bottom:15px;" aria-selected="false" aria-level="2" aria-labelledby="j1_2_anchor" aria-expanded="false" id="j' + o.idCarpeta_CursoProfesor + '" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_2_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i>' + o.nombreCarpeta_CursoProfesor + '&nbsp&nbsp<button class="btn btn-info btn-circle" type="button"id="verArchivosCarpeta" value="' + o.idCarpeta_CursoProfesor + '" type="button"><i class="fa fa-eye"></i>           </button>&nbsp<button class="btn btn-success btn-circle btn-xs" id="botoncurso" data-toggle="modal" data-target="#myModal" value="' + o.idCarpeta_CursoProfesor + ',' + o.rutaCarpeta_CursoProfesor + '" type="button"><i class="fa fa-upload"></i></button></a><ul role="group" class="jstree-children" id="archivos' + o.idCarpeta_CursoProfesor + '"></ul> </li>';
-                $("#cursos").append(total);
+                $(variable).append(total);
             });
         }
     });
@@ -1116,10 +1118,10 @@ function verArchivosCurso(id) {
         type: 'POST',
         dataType: 'json',
         data: { "id": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         var lugar = "#archivos" + id;
         $(lugar).empty();
-        $.each(msg, function (i, o) {
+        $.each(msg, function(i, o) {
             var total = '<li role="treeitem" style="margin-top:15px;" aria-selected="false" aria-level="3" aria-labelledby="j1_3_anchor" aria-expanded="false" id="j1_3" class="jstree-node  jstree-closed"><i class="jstree-icon jstree-ocl" role="presentation"></i><a class="jstree-anchor" href="#" tabindex="-1" id="j1_3_anchor"><i class="jstree-icon jstree-themeicon fa fa-folder jstree-themeicon-custom" role="presentation"></i><strong>Materia:</strong> ' + o.nombreMateria + ' | <strong>Descripción:</strong> ' + o.descripcionArchivo + ' | <strong>Archivo:</strong> ' + o.nombreArchivo + ' &nbsp&nbsp<a class="btn btn-success btn-circle btn-xs" href="' + o.rutaArchivo + '" target="_blank"  rel="noopener noreferrer"  ><i class="fa fa-download"></i></a></a></li>';
             $(lugar).append(total);
         });
@@ -1132,10 +1134,10 @@ function getSelectMateriasCurso(id) {
         type: 'POST',
         dataType: 'json',
         data: { "idCurso": id }
-    }).then(function (msg) {
+    }).then(function(msg) {
         $("#getSelectMaterias").empty();
         var fila = "<option disabled selected>Seleccione la Materia</option>";
-        $.each(msg.arreglo, function (i, o) {
+        $.each(msg.arreglo, function(i, o) {
             fila += "<option value='" + o.idMateria + "'>" + o.nombreMateria + "</option>";
         });
         $("#getSelectMaterias").append(fila);
@@ -1156,7 +1158,7 @@ function editarMateria(id, estado) {
             type: 'POST',
             dataType: 'json',
             data: { "id": id, "estado": estado }
-        }).then(function (msg) {
+        }).then(function(msg) {
             if (msg.msg == "ok") {
                 toastr.success("Materia editada", "Estado Cambiado!!!")
 

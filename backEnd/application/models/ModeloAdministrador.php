@@ -668,22 +668,27 @@ class ModeloAdministrador extends CI_Model
 
     function addProfesorCurso($profesor, $curso, $institucion)
     {
-
+        //LO QUE HAY QUE HACER ES SIMPLEMENTE PREGUNTAR SI EL $RUT.'_'.$AÑO DE LA VARIABLE NOMBRECARPETA_PROFESOR ES DISTINTA YA QUE EL AÑO VARIA SE CREA INSERTA UN NUEVO
+        //REGISTRO EN CARPETA_PROFESOR Y LUEGO SE HACE TODO NUEVAMENTE SEGUN EL FLUJO 
 
         $ok = "";
         $error = "";
 
 
         foreach ($profesor as $value) {
-            $this->db->select('rutProfesor');
+            $this->db->select('rutProfesor,apellidosProfesor,nombresProfesor');
             $this->db->where('idProfesor', $value);
             $var = $this->db->get("profesor")->result();
             $rut = ($var[0]->rutProfesor);
-
-            $this->db->select('idCarpeta_Profesor');
+            $nombreProfesor = ($var[0]->nombresProfesor);
+            $apellidoProfesor = ($var[0]->apellidosProfesor);
+            //echo "Rut Profesor " . $rut . '</br> apellido: ' . $apellidoProfesor;
+            $this->db->select('idCarpeta_Profesor,nombreCarpeta_Profesor');
             $this->db->where('profesor_idProfesor', $value);
             $var = $this->db->get("carpeta_profesor")->result();
             $id = ($var[0]->idCarpeta_Profesor);
+            $nombreCarpeta = ($var[0]->nombreCarpeta_Profesor);
+            //echo "ID CARPETA Profesor: " . $id . "</br>Nombre Carpeta: " . $nombreCarpeta . "</br>";
 
             $this->db->select("c.curso_idCurso, concat(o.nombreCurso,' ',o.gradoCurso,' ',l.nombreLetra_Curso,' ',a.nombreAnno_Escolar) as nombreCurso,count(*) as total");
             $this->db->from("curso_profesor c");
@@ -694,42 +699,111 @@ class ModeloAdministrador extends CI_Model
             $this->db->where('c.curso_idCurso', $curso);
             $nombre = $this->db->get()->result();
             $nombreCurso = $nombre[0]->nombreCurso;
+            //echo "Nombre Curso " . $nombreCurso . '</br>';
             $año = date('Y');
-            $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . "_" . $año . "/" . $nombreCurso;
 
-            $this->db->select('count (*)');
-            $this->db->from('curso_profesor');
-            $this->db->where('profesor_idProfesor', $value);
-            $this->db->where('curso_idCurso', $curso);
-            $this->db->where('institucion_idInstitucion', $institucion);
-            $resultado = $this->db->count_all_results();
-            if ($resultado == 0) {
-                $data = array(
-                    "profesor_idProfesor" => strip_tags($value),
-                    "curso_idCurso" => strip_tags($curso),
-                    "institucion_idInstitucion" => strip_tags($institucion)
-                );
+            //echo "-------</br>";
+            $contador = 0;
+            foreach ($var as $key => $value2) {
+                if ($value2->nombreCarpeta_Profesor == $rut . '_' . $año) {
+                    $contador++;
+                }
+            }
+            //echo "-------</br>";
+            //echo $contador . '<br>';
+            if ($contador != 0) {
+                $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . "_" . $año . "/" . $nombreCurso;
+                //echo "Ruta Carpeta " . $rutaCarpeta . '</br>';
+                $this->db->select('count (*)');
+                $this->db->from('curso_profesor');
+                $this->db->where('profesor_idProfesor', $value);
+                $this->db->where('curso_idCurso', $curso);
+                $this->db->where('institucion_idInstitucion', $institucion);
+                $resultado = $this->db->count_all_results();
+                if ($resultado == 0) {
+                    $data = array(
+                        "profesor_idProfesor" => strip_tags($value),
+                        "curso_idCurso" => strip_tags($curso),
+                        "institucion_idInstitucion" => strip_tags($institucion)
+                    );
 
-                mkdir($rutaCarpeta, 0777, true);
+                    mkdir($rutaCarpeta, 0777, true);
 
 
-                $this->db->insert("curso_profesor", $this->security->xss_clean($data));
-                $this->db->select('MAX(idCurso_Profesor) AS "id"');
-                $var = $this->db->get("curso_profesor")->result();
-                $ultimo = ($var[0]->id);
-                $data2 = array(
-                    "nombreCarpeta_CursoProfesor" => strip_tags($nombreCurso),
-                    "descripcionCarpeta_CursoProfesor" => strip_tags(" "),
-                    "rutaCarpeta_CursoProfesor" => strip_tags($rutaCarpeta),
-                    "cursoprofesor_idCursoProfesor" => strip_tags($ultimo),
-                    "carpetaProfesor" => strip_tags($id),
-                );
-                $this->db->insert("carpeta_curso_profesor", $this->security->xss_clean($data2));
-                $ok = "Ok";
+                    $this->db->insert("curso_profesor", $this->security->xss_clean($data));
+                    $this->db->select('MAX(idCurso_Profesor) AS "id"');
+                    $var = $this->db->get("curso_profesor")->result();
+                    $ultimo = ($var[0]->id);
+                    $data2 = array(
+                        "nombreCarpeta_CursoProfesor" => strip_tags($nombreCurso),
+                        "descripcionCarpeta_CursoProfesor" => strip_tags(" "),
+                        "rutaCarpeta_CursoProfesor" => strip_tags($rutaCarpeta),
+                        "cursoprofesor_idCursoProfesor" => strip_tags($ultimo),
+                        "carpetaProfesor" => strip_tags($id),
+                    );
+                    //echo "Insert nombreCarpeta: " . $nombreCurso . ' ruta carpeta: ' . $rutaCarpeta . ' curso profesor: ' . $ultimo . ' carpeta Profesor: ' . $id . '</br>';
+                     $this->db->insert("carpeta_curso_profesor", $this->security->xss_clean($data2));
+                    $ok = "Ok";
+                } else {
+                    $error = "Error";
+                }
             } else {
-                $error = "Error";
+                $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año;
+                $data2 = array(
+                    "nombreCarpeta_Profesor" => strip_tags($rut . '_' . $año),
+                    "descripcionCarpeta_Profesor" => "Profesor " . strip_tags($nombreProfesor) . " " . strip_tags($apellidoProfesor),
+                    "rutaCarpeta_Profesor" => strip_tags($rutaCarpeta),
+                    "profesor_idProfesor" => strip_tags($value)
+                );
+                //echo $rut . '<br/>';
+                //echo $apellidoProfesor . '<br/>';
+                //echo $rutaCarpeta . '<br/>';
+                //echo $value . '<br/>';
+                $this->db->insert("carpeta_profesor", $this->security->xss_clean($data2));
+                $this->db->select('MAX(idCarpeta_Profesor) AS "id"');
+                $var = $this->db->get("carpeta_profesor")->result();
+                $ultimaCarpeta = ($var[0]->id);
+                mkdir($_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . '_' . $año, 0777, true);
+                //ya se creo la carpeta en caso de que no tuviese carpeta por temas de pasar del año 2019 al 2020 ejemplo
+                $rutaCarpeta = $_SERVER['DOCUMENT_ROOT'] . "Tesis/backEnd/lib/Intranet/" . $rut . "_" . $año . "/" . $nombreCurso;
+                $this->db->select('count (*)');
+                $this->db->from('curso_profesor');
+                $this->db->where('profesor_idProfesor', $value);
+                $this->db->where('curso_idCurso', $curso);
+                $this->db->where('institucion_idInstitucion', $institucion);
+                $resultado = $this->db->count_all_results();
+                if ($resultado == 0) {
+                    $data = array(
+                        "profesor_idProfesor" => strip_tags($value),
+                        "curso_idCurso" => strip_tags($curso),
+                        "institucion_idInstitucion" => strip_tags($institucion)
+                    );
+
+                    mkdir($rutaCarpeta, 0777, true);
+
+
+                    $this->db->insert("curso_profesor", $this->security->xss_clean($data));
+                    $this->db->select('MAX(idCurso_Profesor) AS "id"');
+                    $var = $this->db->get("curso_profesor")->result();
+                    $ultimo = ($var[0]->id);
+
+                   
+                    $data2 = array(
+                        "nombreCarpeta_CursoProfesor" => strip_tags($nombreCurso),
+                        "descripcionCarpeta_CursoProfesor" => strip_tags(" "),
+                        "rutaCarpeta_CursoProfesor" => strip_tags($rutaCarpeta),
+                        "cursoprofesor_idCursoProfesor" => strip_tags($ultimo),
+                        "carpetaProfesor" => strip_tags($ultimaCarpeta),
+                    );
+                   // echo "Insert nombreCarpeta: " . $nombreCurso . ' ruta carpeta: ' . $rutaCarpeta . ' curso profesor: ' . $ultimo . ' carpeta Profesor: ' . $id . '</br>';
+                    $this->db->insert("carpeta_curso_profesor", $this->security->xss_clean($data2));
+                    $ok = "Ok";
+                } else {
+                    $error = "Error";
+                }
             }
         }
+        
         if ($ok == "Ok" && $error == "") {
             return "ok";
         } else if ($error == "Error" && $ok == "") {
@@ -737,6 +811,7 @@ class ModeloAdministrador extends CI_Model
         } else if ($error == "Error" && $ok == "Ok") {
             return "medio";
         }
+        
     }
 
     function addAlumnoCurso($alumnos, $curso, $institucion)
@@ -1004,6 +1079,14 @@ class ModeloAdministrador extends CI_Model
         return $ultimo;
     }
 
+    function ultimoIdAlumno()
+    {
+        $this->db->select('MAX(idAlumno) AS "id"');
+        $var = $this->db->get("alumno")->result();
+        $ultimo = ($var[0]->id) + 1;
+        return $ultimo;
+    }
+
     function insertarExcelProfesor($data)
     {
         $this->db->trans_begin();
@@ -1018,13 +1101,33 @@ class ModeloAdministrador extends CI_Model
         }
     }
 
-    function insertarExcelAlumno($data)
+    function insertarExcelAlumno($data2, $contador, $curso, $institucion)
     {
         $this->db->trans_begin();
-
-        foreach ($data as $value) {
+        $ultimo = $this->ultimoIdAlumno();
+        foreach ($data2 as $value) {
             $this->db->insert('alumno', $this->security->xss_clean($value));
         }
+        $max = $ultimo + $contador;
+        for ($i = $ultimo; $i < $max; $i++) {
+            $this->db->select('count (*)');
+            $this->db->from('curso_alumno');
+            $this->db->where('alumno_idAlumno', $i);
+            $this->db->where('curso_idCurso', $curso);
+            $this->db->where('institucion_idInstitucion', $institucion);
+            $resultado = $this->db->count_all_results();
+            if ($resultado == 0) {
+                $data = array(
+                    "curso_idCurso" => strip_tags($curso),
+                    "alumno_idAlumno" => strip_tags($i),
+                    "institucion_idInstitucion" => strip_tags($institucion)
+                );
+                $this->db->insert("curso_alumno", $this->security->xss_clean($data));
+                $ok = "Ok";
+            }
+        }
+
+
         if ($this->db->trans_status()  ===  FALSE) {
             $this->db->trans_rollback();
         } else {
